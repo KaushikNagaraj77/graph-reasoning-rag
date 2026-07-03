@@ -33,6 +33,7 @@ project's lessons):
 Dependencies: networkx, numpy.
 """
 
+import math
 import random
 from datetime import datetime
 from enum import Enum
@@ -155,17 +156,37 @@ class ReasoningGraph:
                                              self.graph.nodes[pred].get('confidence', 0.5))
         return contradiction_count, contradiction_confidence
 
-    def update_confidence_with_graph_structure(self, verbose=False):
+    def update_confidence_with_graph_structure(self, verbose=False,
+                                               mechanism="additive"):
         """
-        Refine node confidences from graph topology:
+        Refine node confidences from graph topology.
+
+        mechanism="additive" (default, unchanged legacy behaviour):
           - supporting edges boost (diminishing, capped at +0.4)
           - contradiction edges penalize (capped at -0.4)
           - each incoming CONFLUENCE edge adds a further +0.10
+          Confidences are mutated in node order, so a node sees its
+          predecessors' already-updated values.
+
+        mechanism="logodds" (Mechanism C from compare_mechanisms.py, validated
+        parameters W=1.5, prior clamped to [0.02, 0.98]):
+          - seed reliability is treated as a PRIOR in log-odds space
+          - each support edge adds +W*mass, each contradiction edge -W*mass,
+            where mass = edge_confidence * predecessor SEED confidence
+          - final = sigmoid(logit(prior) + W*Σ_sup mass - W*Σ_con mass)
+          Computed against a frozen seed snapshot (single pass, no in-loop
+          mutation) so it matches the harness-validated formulation exactly.
+
         Results are clamped to [0, 1]; per-node deltas are stored in node
         metadata and aggregate metrics in `self.graph_structure_influence`.
         """
         if len(self.graph.nodes) < 2:
             return
+
+        if mechanism == "logodds":
+            return self._update_confidence_logodds(verbose=verbose)
+        if mechanism != "additive":
+            raise ValueError(f"Unknown mechanism: {mechanism!r}")
 
         confidence_changes = {}
         for node_id in self.graph.nodes:
@@ -207,6 +228,69 @@ class ReasoningGraph:
         if verbose:
             gi = self.graph_structure_influence
             print(f"[{self.name}] confidence pass: avg|Δ|={gi['avg_abs_change']:.3f} "
+                  f"boosted={gi['nodes_boosted']} penalized={gi['nodes_penalized']}")
+
+    def _update_confidence_logodds(self, verbose=False, W=1.5,
+                                   prior_lo=0.02, prior_hi=0.98):
+        """
+        Mechanism C: seed-as-prior + multiplicative (log-odds) evidence update.
+        Support and contradiction mass use each predecessor's SEED confidence
+        (a frozen snapshot taken before any update), matching the validated
+        harness formulation. Confidences are written after all nodes are
+        computed (single pass, no in-loop mutation).
+        """
+        seed = {n: self.graph.nodes[n].get('confidence', 0.5)
+                for n in self.graph.nodes}
+
+        def masses(node_id):
+            sup = con = 0.0
+            for pred in self.graph.predecessors(node_id):
+                edge = self.graph[pred][node_id]
+                m = edge.get('confidence', 0.5) * seed[pred]
+                etype = edge.get('type', '')
+                if etype in (RelationType.SUPPORT.value,
+                             RelationType.CONFLUENCE.value,
+                             RelationType.VALID_INFERENCE.value,
+                             RelationType.DERIVATION.value):
+                    sup += m
+                elif etype in (RelationType.CONTRADICTION.value,
+                               RelationType.FALLACY.value):
+                    con += m
+            return sup, con
+
+        confidence_changes = {}
+        for node_id in self.graph.nodes:
+            original = seed[node_id]
+            support_count, _ = self._count_support_edges(node_id)
+            contra_count, _ = self._count_contradiction_edges(node_id)
+            sup_mass, con_mass = masses(node_id)
+
+            prior = min(prior_hi, max(prior_lo, original))
+            logit = math.log(prior / (1.0 - prior))
+            logit += W * sup_mass - W * con_mass
+            new_confidence = 1.0 / (1.0 + math.exp(-logit))
+            new_confidence = max(0.0, min(1.0, new_confidence))
+
+            self.graph.nodes[node_id]['confidence'] = new_confidence
+            confidence_changes[node_id] = new_confidence - original
+
+            meta = self.graph.nodes[node_id].setdefault('metadata', {})
+            meta['support_count'] = support_count
+            meta['contradiction_count'] = contra_count
+            meta['confidence_change'] = new_confidence - original
+
+        self.graph_structure_influence = {
+            'confidence_changes': confidence_changes,
+            'avg_abs_change': float(np.mean([abs(c) for c in confidence_changes.values()]))
+                              if confidence_changes else 0.0,
+            'max_increase': max(confidence_changes.values()) if confidence_changes else 0.0,
+            'max_decrease': min(confidence_changes.values()) if confidence_changes else 0.0,
+            'nodes_boosted': sum(1 for c in confidence_changes.values() if c > 0.05),
+            'nodes_penalized': sum(1 for c in confidence_changes.values() if c < -0.05),
+        }
+        if verbose:
+            gi = self.graph_structure_influence
+            print(f"[{self.name}] log-odds pass: avg|Δ|={gi['avg_abs_change']:.3f} "
                   f"boosted={gi['nodes_boosted']} penalized={gi['nodes_penalized']}")
 
     # ------------------------------------------------------------------

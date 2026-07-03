@@ -4,7 +4,7 @@
   "claims": [
     {
       "id": "drift1915_monograph_c0",
-      "claim_text": "The great landmasses of the Earth are not fixed in place.",
+      "claim_text": "The great landmasses of the Earth are not fixed in place but have drifted and continue to drift slowly across the globe over vast geological time.",
       "topic": "continental_drift_1915",
       "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
       "source_reliability": 0.42,
@@ -13,7 +13,7 @@
     },
     {
       "id": "drift1915_monograph_c1",
-      "claim_text": "The landmasses have drifted slowly across the globe over vast spans of geological time.",
+      "claim_text": "The continents were once joined together in a single primordial supercontinent that broke apart, with its fragments wandering to their present positions.",
       "topic": "continental_drift_1915",
       "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
       "source_reliability": 0.42,
@@ -22,61 +22,7 @@
     },
     {
       "id": "drift1915_monograph_c2",
-      "claim_text": "The landmasses continue to drift across the globe.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c3",
-      "claim_text": "The continents were once joined together in a single primordial supercontinent.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c4",
-      "claim_text": "The supercontinent broke apart in a distant epoch.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c5",
-      "claim_text": "The fragments of the supercontinent have wandered to their present positions.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c6",
-      "claim_text": "The correspondence of opposing coasts is a signature of ancient continental displacement.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c7",
-      "claim_text": "The distribution of fossils across the oceans is a signature of ancient continental displacement.",
-      "topic": "continental_drift_1915",
-      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
-      "source_reliability": 0.42,
-      "ground_truth": true,
-      "doc_id": "drift1915_monograph"
-    },
-    {
-      "id": "drift1915_monograph_c8",
-      "claim_text": "The matching of geological formations across the oceans is a signature of ancient continental displacement.",
+      "claim_text": "The correspondence of opposing coasts, the distribution of fossils, and the matching of geological formations across oceans are evidence of ancient continental displacement rather than coincidence.",
       "topic": "continental_drift_1915",
       "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
       "source_reliability": 0.42,
@@ -85,7 +31,7 @@
     },
     {
       "id": "drift1915_establishment_c0",
-      "claim_text": "The permanence of the continents and ocean basins is a settled principle of geology.",
+      "claim_text": "The permanence of the continents and ocean basins is a settled principle of geology, and continents do not and cannot wander across the Earth's surface.",
       "topic": "continental_drift_1915",
       "source": "Authoritative geology textbook, early-20th-century fixist consensus",
       "source_reliability": 0.83,
@@ -94,7 +40,7 @@
     },
     {
       "id": "drift1915_establishment_c1",
-      "claim_text": "The continents stand fixed upon the Earth's crust.",
+      "claim_text": "No known force is adequate to propel continental masses horizontally through the rigid rock beneath them.",
       "topic": "continental_drift_1915",
       "source": "Authoritative geology textbook, early-20th-century fixist consensus",
       "source_reliability": 0.83,
@@ -103,7 +49,7 @@
     },
     {
       "id": "drift1915_establishment_c2",
-      "claim_text": "The continents do not and cannot wander across the Earth's surface.",
+      "claim_text": "The occurrence of the same fossil species on lands now separated by ocean is properly explained by former land bridges that have since foundered beneath the waves.",
       "topic": "continental_drift_1915",
       "source": "Authoritative geology textbook, early-20th-century fixist consensus",
       "source_reliability": 0.83,
@@ -112,43 +58,7 @@
     },
     {
       "id": "drift1915_establishment_c3",
-      "claim_text": "No known force is remotely adequate to propel continental masses horizontally through the rigid rock beneath them.",
-      "topic": "continental_drift_1915",
-      "source": "Authoritative geology textbook, early-20th-century fixist consensus",
-      "source_reliability": 0.83,
-      "ground_truth": false,
-      "doc_id": "drift1915_establishment"
-    },
-    {
-      "id": "drift1915_establishment_c4",
-      "claim_text": "Where the same fossil species are found on lands now parted by ocean, the proper explanation is a former land bridge.",
-      "topic": "continental_drift_1915",
-      "source": "Authoritative geology textbook, early-20th-century fixist consensus",
-      "source_reliability": 0.83,
-      "ground_truth": false,
-      "doc_id": "drift1915_establishment"
-    },
-    {
-      "id": "drift1915_establishment_c5",
-      "claim_text": "Land bridges are isthmuses that have since foundered beneath the waves.",
-      "topic": "continental_drift_1915",
-      "source": "Authoritative geology textbook, early-20th-century fixist consensus",
-      "source_reliability": 0.83,
-      "ground_truth": false,
-      "doc_id": "drift1915_establishment"
-    },
-    {
-      "id": "drift1915_establishment_c6",
-      "claim_text": "The notion of drifting continents is a fanciful speculation.",
-      "topic": "continental_drift_1915",
-      "source": "Authoritative geology textbook, early-20th-century fixist consensus",
-      "source_reliability": 0.83,
-      "ground_truth": false,
-      "doc_id": "drift1915_establishment"
-    },
-    {
-      "id": "drift1915_establishment_c7",
-      "claim_text": "The notion of drifting continents is unsupported by any sound mechanism.",
+      "claim_text": "The notion of drifting continents is a fanciful speculation unsupported by any sound mechanism.",
       "topic": "continental_drift_1915",
       "source": "Authoritative geology textbook, early-20th-century fixist consensus",
       "source_reliability": 0.83,
@@ -157,7 +67,7 @@
     },
     {
       "id": "drift1915_coastlines_c0",
-      "claim_text": "The eastern seaboard of South America and the western seaboard of Africa mirror one another closely.",
+      "claim_text": "The eastern coastline of South America and the western coastline of Africa mirror each other closely, with the bulge of Brazil corresponding to the inward curve of the Gulf of Guinea.",
       "topic": "continental_drift_1915",
       "source": "Atlantic coastline correspondence survey",
       "source_reliability": 0.7,
@@ -166,25 +76,7 @@
     },
     {
       "id": "drift1915_coastlines_c1",
-      "claim_text": "The outward bulge of Brazil corresponds to the inward curve of the Gulf of Guinea.",
-      "topic": "continental_drift_1915",
-      "source": "Atlantic coastline correspondence survey",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_coastlines"
-    },
-    {
-      "id": "drift1915_coastlines_c2",
-      "claim_text": "The geometric correspondence between the Atlantic coasts of South America and Africa is too exact across too great a length to be readily dismissed as coincidence.",
-      "topic": "continental_drift_1915",
-      "source": "Atlantic coastline correspondence survey",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_coastlines"
-    },
-    {
-      "id": "drift1915_coastlines_c3",
-      "claim_text": "The correspondence of the two coastlines suggests they were once joined and afterward drawn apart.",
+      "claim_text": "The geometric fit of the South American and African coastlines is too exact and too extensive to be readily dismissed as coincidence, suggesting the two were once joined.",
       "topic": "continental_drift_1915",
       "source": "Atlantic coastline correspondence survey",
       "source_reliability": 0.7,
@@ -193,7 +85,7 @@
     },
     {
       "id": "drift1915_fossils_c0",
-      "claim_text": "The seed-fern Glossopteris is found in the rocks of South America.",
+      "claim_text": "The seed-fern Glossopteris is found in the rocks of South America, Africa, India, and Australia.",
       "topic": "continental_drift_1915",
       "source": "Palaeontological fossil-distribution records",
       "source_reliability": 0.7,
@@ -202,7 +94,7 @@
     },
     {
       "id": "drift1915_fossils_c1",
-      "claim_text": "The seed-fern Glossopteris is found in the rocks of Africa.",
+      "claim_text": "Remains of the freshwater reptile Mesosaurus occur on both sides of the South Atlantic.",
       "topic": "continental_drift_1915",
       "source": "Palaeontological fossil-distribution records",
       "source_reliability": 0.7,
@@ -211,43 +103,7 @@
     },
     {
       "id": "drift1915_fossils_c2",
-      "claim_text": "The seed-fern Glossopteris is found in the rocks of India.",
-      "topic": "continental_drift_1915",
-      "source": "Palaeontological fossil-distribution records",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_fossils"
-    },
-    {
-      "id": "drift1915_fossils_c3",
-      "claim_text": "The seed-fern Glossopteris is found in the rocks of Australia.",
-      "topic": "continental_drift_1915",
-      "source": "Palaeontological fossil-distribution records",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_fossils"
-    },
-    {
-      "id": "drift1915_fossils_c4",
-      "claim_text": "Remains of the small freshwater reptile Mesosaurus occur on both sides of the South Atlantic.",
-      "topic": "continental_drift_1915",
-      "source": "Palaeontological fossil-distribution records",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_fossils"
-    },
-    {
-      "id": "drift1915_fossils_c5",
-      "claim_text": "Mesosaurus is characterized as a small freshwater reptile.",
-      "topic": "continental_drift_1915",
-      "source": "Palaeontological fossil-distribution records",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_fossils"
-    },
-    {
-      "id": "drift1915_fossils_c6",
-      "claim_text": "The presence of land-bound and freshwater species on landmasses now divided by broad oceans is difficult to explain unless those landmasses were formerly contiguous.",
+      "claim_text": "The presence of the same land-bound and freshwater species on landmasses now divided by broad oceans is difficult to explain unless those landmasses were formerly contiguous.",
       "topic": "continental_drift_1915",
       "source": "Palaeontological fossil-distribution records",
       "source_reliability": 0.7,
@@ -256,7 +112,7 @@
     },
     {
       "id": "drift1915_strata_c0",
-      "claim_text": "Geological structures broken off at one coastline resume at another coastline across the ocean.",
+      "claim_text": "The mountain belts and distinctive rock strata of the eastern coast of South America align with those of western Africa, matching in age, sequence, and character.",
       "topic": "continental_drift_1915",
       "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
       "source_reliability": 0.7,
@@ -265,52 +121,7 @@
     },
     {
       "id": "drift1915_strata_c1",
-      "claim_text": "The mountain belts of the eastern coast of South America align with those of western Africa.",
-      "topic": "continental_drift_1915",
-      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_strata"
-    },
-    {
-      "id": "drift1915_strata_c2",
-      "claim_text": "The distinctive rock strata of the eastern coast of South America align with those of western Africa.",
-      "topic": "continental_drift_1915",
-      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_strata"
-    },
-    {
-      "id": "drift1915_strata_c3",
-      "claim_text": "The matching geological structures of South America and western Africa correspond in age, sequence, and character.",
-      "topic": "continental_drift_1915",
-      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_strata"
-    },
-    {
-      "id": "drift1915_strata_c4",
-      "claim_text": "Ancient glacial deposits of the same period are found across the southern continents.",
-      "topic": "continental_drift_1915",
-      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_strata"
-    },
-    {
-      "id": "drift1915_strata_c5",
-      "claim_text": "The positions of glacial deposits across the southern continents make little sense on the assumption of fixed continents.",
-      "topic": "continental_drift_1915",
-      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
-      "source_reliability": 0.7,
-      "ground_truth": false,
-      "doc_id": "drift1915_strata"
-    },
-    {
-      "id": "drift1915_strata_c6",
-      "claim_text": "The glacial deposits across the southern continents fall into order if those lands were once assembled together nearer the pole.",
+      "claim_text": "Ancient glacial deposits of the same period are found across the southern continents in positions that make little sense if the continents were always fixed but fall into order if those lands were once assembled together nearer the pole.",
       "topic": "continental_drift_1915",
       "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
       "source_reliability": 0.7,
@@ -323,295 +134,169 @@
       "from": "drift1915_monograph_c1",
       "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "The claim that landmasses have drifted over geological time directly supports the idea that they are not fixed in place."
+      "rationale": "The idea of a primordial supercontinent that broke apart and drifted is a direct elaboration and sub-claim supporting the core thesis that continents have drifted across the globe."
     },
     {
       "from": "drift1915_monograph_c2",
       "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "Ongoing drift of landmasses reinforces that they are not fixed in place."
+      "rationale": "Coastline correspondences, fossil distributions, and matching geological formations are cited as direct evidence for the core claim of continental drift."
     },
     {
-      "from": "drift1915_monograph_c3",
-      "to": "drift1915_monograph_c0",
-      "type": "support",
-      "rationale": "A single primordial supercontinent that later broke apart implies the landmasses were never permanently fixed."
-    },
-    {
-      "from": "drift1915_monograph_c4",
-      "to": "drift1915_monograph_c3",
-      "type": "support",
-      "rationale": "The breaking apart of the supercontinent is the mechanism by which the formerly joined continents separated."
-    },
-    {
-      "from": "drift1915_monograph_c5",
-      "to": "drift1915_monograph_c4",
-      "type": "support",
-      "rationale": "The wandering of supercontinent fragments to present positions is a direct consequence of the supercontinent breaking apart."
-    },
-    {
-      "from": "drift1915_monograph_c5",
+      "from": "drift1915_monograph_c2",
       "to": "drift1915_monograph_c1",
       "type": "support",
-      "rationale": "The fragments wandering to their present positions is a concrete description of landmasses drifting over geological time."
-    },
-    {
-      "from": "drift1915_monograph_c6",
-      "to": "drift1915_monograph_c1",
-      "type": "support",
-      "rationale": "Corresponding opposing coasts serve as evidence for ancient continental displacement, supporting the claim of past drift."
-    },
-    {
-      "from": "drift1915_monograph_c7",
-      "to": "drift1915_monograph_c1",
-      "type": "support",
-      "rationale": "Fossil distribution across oceans is cited as evidence for ancient continental displacement and thus past drift."
-    },
-    {
-      "from": "drift1915_monograph_c8",
-      "to": "drift1915_monograph_c1",
-      "type": "support",
-      "rationale": "Matching geological formations across oceans support the claim that landmasses have drifted over geological time."
-    },
-    {
-      "from": "drift1915_establishment_c1",
-      "to": "drift1915_establishment_c0",
-      "type": "support",
-      "rationale": "Fixed continents are a direct expression of the permanence principle."
-    },
-    {
-      "from": "drift1915_establishment_c2",
-      "to": "drift1915_establishment_c0",
-      "type": "support",
-      "rationale": "The impossibility of continental wandering directly upholds the principle of permanence of continents."
-    },
-    {
-      "from": "drift1915_establishment_c3",
-      "to": "drift1915_establishment_c2",
-      "type": "support",
-      "rationale": "The absence of any known adequate force to move continents supports the claim that continents cannot wander."
-    },
-    {
-      "from": "drift1915_establishment_c7",
-      "to": "drift1915_establishment_c6",
-      "type": "support",
-      "rationale": "Lack of a sound mechanism directly underpins the characterisation of continental drift as fanciful speculation."
-    },
-    {
-      "from": "drift1915_establishment_c3",
-      "to": "drift1915_establishment_c7",
-      "type": "support",
-      "rationale": "No known adequate force is the core reason continental drift is said to be unsupported by any sound mechanism."
-    },
-    {
-      "from": "drift1915_establishment_c4",
-      "to": "drift1915_fossils_c6",
-      "type": "contradiction",
-      "rationale": "The land-bridge explanation directly contradicts the claim that contiguous landmasses (drift) are needed to explain shared species across oceans."
-    },
-    {
-      "from": "drift1915_establishment_c4",
-      "to": "drift1915_monograph_c7",
-      "type": "contradiction",
-      "rationale": "The land-bridge explanation contradicts treating fossil distribution as a signature of continental displacement."
+      "rationale": "The physical and biological evidence of ancient displacement supports the sub-claim that continents were once joined and have since wandered."
     },
     {
       "from": "drift1915_establishment_c0",
       "to": "drift1915_monograph_c0",
       "type": "contradiction",
-      "rationale": "Permanence of continents directly contradicts the claim that great landmasses are not fixed in place."
+      "rationale": "The permanence of continents and ocean basins directly contradicts the core thesis that continents drift across the globe."
     },
     {
       "from": "drift1915_establishment_c1",
       "to": "drift1915_monograph_c0",
       "type": "contradiction",
-      "rationale": "Continents standing fixed contradicts the claim that landmasses are not fixed in place."
+      "rationale": "The absence of any known force capable of moving continents horizontally undermines the core claim that continents do drift."
     },
     {
-      "from": "drift1915_establishment_c2",
-      "to": "drift1915_monograph_c1",
-      "type": "contradiction",
-      "rationale": "The claim that continents cannot wander directly contradicts the claim that landmasses have drifted over geological time."
+      "from": "drift1915_establishment_c1",
+      "to": "drift1915_establishment_c3",
+      "type": "support",
+      "rationale": "The lack of a known driving mechanism is the primary basis for dismissing continental drift as fanciful speculation without sound mechanical grounding."
     },
     {
-      "from": "drift1915_establishment_c2",
-      "to": "drift1915_monograph_c2",
-      "type": "contradiction",
-      "rationale": "The claim that continents do not and cannot wander contradicts the claim that they continue to drift today."
-    },
-    {
-      "from": "drift1915_establishment_c2",
-      "to": "drift1915_monograph_c5",
-      "type": "contradiction",
-      "rationale": "Fixed continents cannot have wandered to present positions from a prior supercontinent."
-    },
-    {
-      "from": "drift1915_establishment_c6",
+      "from": "drift1915_establishment_c3",
       "to": "drift1915_monograph_c0",
       "type": "contradiction",
-      "rationale": "Dismissing continental drift as fanciful speculation contradicts the foundational claim that landmasses are not fixed."
+      "rationale": "Labelling continental drift as fanciful speculation without a sound mechanism is a direct rejection of the core drift thesis."
+    },
+    {
+      "from": "drift1915_establishment_c2",
+      "to": "drift1915_fossils_c2",
+      "type": "contradiction",
+      "rationale": "Land-bridge subsidence as an explanation for shared fossil species directly contradicts the claim that contiguous landmasses (drift) are needed to explain their distribution."
+    },
+    {
+      "from": "drift1915_establishment_c2",
+      "to": "drift1915_monograph_c0",
+      "type": "contradiction",
+      "rationale": "Explaining shared fossils via sunken land bridges removes a key line of evidence for continental drift, contradicting the core drift claim."
     },
     {
       "from": "drift1915_coastlines_c0",
-      "to": "drift1915_monograph_c6",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "The close mirroring of South American and African seaboards is a concrete instance of the correspondence of opposing coasts cited as evidence of displacement."
-    },
-    {
-      "from": "drift1915_coastlines_c1",
-      "to": "drift1915_coastlines_c0",
-      "type": "support",
-      "rationale": "The specific Brazil bulge/Gulf of Guinea correspondence is a detailed illustration of the general coastal mirroring claim."
-    },
-    {
-      "from": "drift1915_coastlines_c2",
-      "to": "drift1915_coastlines_c3",
-      "type": "support",
-      "rationale": "The exactness of the geometric correspondence across a great length is the key evidence supporting the inference that the coasts were once joined."
-    },
-    {
-      "from": "drift1915_coastlines_c3",
-      "to": "drift1915_monograph_c3",
-      "type": "support",
-      "rationale": "The inference that the two coastlines were once joined supports the broader claim of a former single supercontinent."
-    },
-    {
-      "from": "drift1915_coastlines_c3",
-      "to": "drift1915_monograph_c4",
-      "type": "support",
-      "rationale": "Coastlines once joined and afterward drawn apart support the claim of a supercontinent that broke apart."
+      "rationale": "The mirroring of the South American and African coastlines is direct observational evidence supporting the core claim that continents have drifted from formerly joined positions."
     },
     {
       "from": "drift1915_coastlines_c0",
-      "to": "drift1915_coastlines_c2",
+      "to": "drift1915_monograph_c1",
       "type": "support",
-      "rationale": "The close mirroring of the two seaboards is the basis for the claim of an exact geometric correspondence too great to be coincidence."
+      "rationale": "The geometric match of the two coastlines supports the sub-claim that the continents were once joined in a supercontinent."
     },
     {
       "from": "drift1915_coastlines_c1",
-      "to": "drift1915_coastlines_c2",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "The specific bulge-to-curve correspondence reinforces the argument that the geometric match is too precise to be coincidental."
+      "rationale": "The assessment that the fit is too exact to be coincidence reinforces the core claim that South America and Africa were once connected and have since drifted apart."
+    },
+    {
+      "from": "drift1915_coastlines_c1",
+      "to": "drift1915_monograph_c1",
+      "type": "support",
+      "rationale": "The precision of the coastline fit supports the supercontinent sub-claim by implying former physical continuity."
+    },
+    {
+      "from": "drift1915_coastlines_c0",
+      "to": "drift1915_coastlines_c1",
+      "type": "support",
+      "rationale": "The specific geometric detail of the Brazil\u2013Guinea correspondence is the factual basis for the broader conclusion that the fit is too exact to be coincidental."
     },
     {
       "from": "drift1915_fossils_c0",
-      "to": "drift1915_fossils_c6",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "Finding Glossopteris in South America is part of the evidence that land-bound species appear on landmasses now divided by ocean."
+      "rationale": "The distribution of Glossopteris across four now-separated southern continents is direct fossil evidence supporting the core claim of continental drift."
+    },
+    {
+      "from": "drift1915_fossils_c0",
+      "to": "drift1915_monograph_c1",
+      "type": "support",
+      "rationale": "Glossopteris spanning South America, Africa, India, and Australia supports the idea that these landmasses were once assembled in a single supercontinent."
+    },
+    {
+      "from": "drift1915_fossils_c0",
+      "to": "drift1915_fossils_c2",
+      "type": "support",
+      "rationale": "Glossopteris occurring on four widely separated continents is a concrete example underpinning the general claim that shared land-bound species imply former contiguity."
     },
     {
       "from": "drift1915_fossils_c1",
-      "to": "drift1915_fossils_c6",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "Finding Glossopteris in Africa contributes to the pattern of a land-bound species spanning ocean-divided landmasses."
+      "rationale": "Mesosaurus, a freshwater reptile, found on both sides of the South Atlantic is strong evidence supporting the core claim that these landmasses were once connected and have drifted apart."
+    },
+    {
+      "from": "drift1915_fossils_c1",
+      "to": "drift1915_monograph_c1",
+      "type": "support",
+      "rationale": "The trans-Atlantic distribution of a freshwater reptile supports the supercontinent sub-claim by making ocean-crossing impossible without former land continuity."
+    },
+    {
+      "from": "drift1915_fossils_c1",
+      "to": "drift1915_fossils_c2",
+      "type": "support",
+      "rationale": "Mesosaurus is a specific example of a freshwater species on now ocean-divided landmasses, directly substantiating the general fossil contiguity claim."
     },
     {
       "from": "drift1915_fossils_c2",
-      "to": "drift1915_fossils_c6",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "Finding Glossopteris in India adds another ocean-separated landmass to the pattern supporting former contiguity."
+      "rationale": "The general principle that shared land-bound and freshwater species across oceans implies former contiguity is a key evidentiary pillar for the core continental drift claim."
     },
     {
-      "from": "drift1915_fossils_c3",
-      "to": "drift1915_fossils_c6",
+      "from": "drift1915_fossils_c2",
+      "to": "drift1915_monograph_c1",
       "type": "support",
-      "rationale": "Finding Glossopteris in Australia further extends the pattern of a land-bound species across now-separated landmasses."
+      "rationale": "Former contiguity of landmasses to explain fossil distributions directly supports the supercontinent sub-claim."
     },
     {
-      "from": "drift1915_fossils_c4",
-      "to": "drift1915_fossils_c6",
-      "type": "support",
-      "rationale": "Mesosaurus occurring on both sides of the South Atlantic is a direct example of a species found on landmasses now divided by ocean."
-    },
-    {
-      "from": "drift1915_fossils_c5",
-      "to": "drift1915_fossils_c6",
-      "type": "support",
-      "rationale": "Mesosaurus being a freshwater reptile makes its trans-oceanic distribution especially hard to explain without former contiguity, strengthening that claim."
-    },
-    {
-      "from": "drift1915_fossils_c6",
-      "to": "drift1915_monograph_c7",
-      "type": "support",
-      "rationale": "The difficulty of explaining cross-ocean species distribution without former contiguity supports treating fossil distribution as a signature of ancient continental displacement."
-    },
-    {
-      "from": "drift1915_fossils_c6",
-      "to": "drift1915_monograph_c3",
-      "type": "support",
-      "rationale": "Former contiguity of now-separated landmasses supports the claim of a single primordial supercontinent."
-    },
-    {
-      "from": "drift1915_fossils_c6",
-      "to": "drift1915_establishment_c4",
+      "from": "drift1915_fossils_c1",
+      "to": "drift1915_establishment_c2",
       "type": "contradiction",
-      "rationale": "The claim that former contiguity best explains cross-ocean species contradicts the land-bridge explanation offered by the establishment."
+      "rationale": "A freshwater reptile like Mesosaurus could not cross an ocean even via a land bridge that later foundered, making the land-bridge explanation implausible for this specific case."
+    },
+    {
+      "from": "drift1915_strata_c0",
+      "to": "drift1915_monograph_c0",
+      "type": "support",
+      "rationale": "Matching mountain belts and rock strata across the South Atlantic is geological evidence directly supporting the core claim that the continents were once joined and have drifted."
+    },
+    {
+      "from": "drift1915_strata_c0",
+      "to": "drift1915_monograph_c1",
+      "type": "support",
+      "rationale": "Aligned strata matching in age, sequence, and character supports the sub-claim of a formerly unified supercontinent."
     },
     {
       "from": "drift1915_strata_c1",
-      "to": "drift1915_strata_c0",
+      "to": "drift1915_monograph_c0",
       "type": "support",
-      "rationale": "Aligning mountain belts across the South Atlantic is a specific instance of geological structures resuming across an ocean."
+      "rationale": "Glacial deposits spread across the southern continents in patterns explicable only by their former polar assembly is powerful evidence for the core continental drift thesis."
     },
     {
-      "from": "drift1915_strata_c2",
-      "to": "drift1915_strata_c0",
+      "from": "drift1915_strata_c1",
+      "to": "drift1915_monograph_c1",
       "type": "support",
-      "rationale": "Aligning rock strata across the South Atlantic is another specific instance of geological structures resuming across an ocean."
+      "rationale": "The coherence of glacial deposit positions when the southern continents are reassembled near a pole supports the supercontinent sub-claim."
     },
     {
-      "from": "drift1915_strata_c3",
-      "to": "drift1915_strata_c1",
+      "from": "drift1915_establishment_c0",
+      "to": "drift1915_establishment_c3",
       "type": "support",
-      "rationale": "The correspondence in age, sequence, and character of the structures strengthens the claim that the mountain belts align across the ocean."
-    },
-    {
-      "from": "drift1915_strata_c3",
-      "to": "drift1915_strata_c2",
-      "type": "support",
-      "rationale": "Matching age, sequence, and character also reinforces the alignment of rock strata across the ocean."
-    },
-    {
-      "from": "drift1915_strata_c0",
-      "to": "drift1915_monograph_c8",
-      "type": "support",
-      "rationale": "Geological structures broken off at one coast resuming at another is a concrete instance of matching geological formations across oceans."
-    },
-    {
-      "from": "drift1915_strata_c0",
-      "to": "drift1915_monograph_c3",
-      "type": "support",
-      "rationale": "Matching geological structures across oceans supports the inference of a former joined supercontinent."
-    },
-    {
-      "from": "drift1915_strata_c5",
-      "to": "drift1915_establishment_c0",
-      "type": "contradiction",
-      "rationale": "The claim that glacial deposit positions make little sense under fixed continents contradicts the principle of continental permanence."
-    },
-    {
-      "from": "drift1915_strata_c6",
-      "to": "drift1915_monograph_c3",
-      "type": "support",
-      "rationale": "Glacial deposits falling into order when southern lands are assembled together near a pole supports the idea of a former supercontinent."
-    },
-    {
-      "from": "drift1915_strata_c6",
-      "to": "drift1915_strata_c5",
-      "type": "support",
-      "rationale": "The coherence of glacial deposits under an assembled-continent model directly explains why their current positions make little sense with fixed continents."
-    },
-    {
-      "from": "drift1915_strata_c4",
-      "to": "drift1915_strata_c5",
-      "type": "support",
-      "rationale": "The existence of same-period glacial deposits spread across the southern continents is the observation that is difficult to explain with fixed continents."
-    },
-    {
-      "from": "drift1915_strata_c4",
-      "to": "drift1915_strata_c6",
-      "type": "support",
-      "rationale": "The same-period glacial deposits across southern continents are the data that fall into order when those lands are assembled near a pole."
+      "rationale": "The settled principle of continental permanence provides the established-science backdrop that makes drift appear to be fanciful speculation."
     }
   ]
 }

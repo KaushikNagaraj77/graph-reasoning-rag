@@ -263,7 +263,10 @@ def score(claims, relationships, final):
 DATASETS = [
     ("sample_corpus", ROOT / "data" / "sample_corpus.json"),
     ("real_extracted_easy", ROOT / "data" / "proposed_relationships.json"),
-    ("real_extracted_1915", ROOT / "data" / "verified_relationships_hardcase.json"),
+    # CLEAN re-extraction of the 1915 hard case (14 claims, evidence
+    # concentrated on the core "continents drifted" claim). The stale
+    # 35-claim fragmented version lives in verified_relationships_hardcase.json.
+    ("real_extracted_1915", ROOT / "data" / "proposed_relationships_hardcase.json"),
 ]
 
 # Topics we expect to be "already passing" under the baseline (for regression

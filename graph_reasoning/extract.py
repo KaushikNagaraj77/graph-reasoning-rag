@@ -149,11 +149,21 @@ class BatchExtractionResult(BaseModel):
 
 _EXTRACTION_SYSTEM = (
     "You extract atomic factual claims from a document. A claim is a single, "
-    "self-contained assertion the document makes about the world. Split compound "
-    "statements into separate atomic claims. Extract only what the document "
-    "actually asserts — do not add outside knowledge, do not judge whether a "
-    "claim is true, and do not assess the reliability of the source. Keep each "
-    "claim short (one sentence)."
+    "self-contained assertion the document makes about the world. Split genuinely "
+    "distinct compound statements into separate atomic claims. Extract only what "
+    "the document actually asserts — do not add outside knowledge, do not judge "
+    "whether a claim is true, and do not assess the reliability of the source. "
+    "Keep each claim short (one sentence).\n\n"
+    "CONSOLIDATE near-duplicates. If several sentences restate the SAME core "
+    "position in different words — e.g. 'the continents are not fixed', 'they "
+    "have drifted', and 'they continue to drift' all assert the one position that "
+    "continents move — emit ONE consolidated core claim for that position, not a "
+    "near-synonymous claim for each phrasing. Prefer the clearest, most central "
+    "wording as the single claim. Only emit separate claims for genuinely "
+    "different assertions (a distinct mechanism, a distinct piece of evidence, a "
+    "distinct consequence), not for rephrasings, elaborations, or restatements "
+    "of a claim you have already captured. Aim for a small set of load-bearing "
+    "claims per document rather than many overlapping fragments."
 )
 
 _BATCH_EXTRACTION_SYSTEM = _EXTRACTION_SYSTEM + (
@@ -389,7 +399,20 @@ _RELATIONSHIP_SYSTEM = (
     "one claim provides evidence for or reinforces another. Only relate claims "
     "within the same topic. Do not relate a claim to itself. Only propose "
     "relationships you are confident about based solely on the claim texts. "
-    "These proposals will be reviewed by a human before use."
+    "These proposals will be reviewed by a human before use.\n\n"
+    "ATTACH EVIDENCE TO THE CORE CLAIM. Within a topic there is usually one "
+    "central position claim (the main thesis a side is arguing) and possibly a "
+    "few narrative or sub-detail claims elaborating on it (e.g. a specific "
+    "mechanism, a historical detail). When a piece of physical or observational "
+    "evidence supports a position, point its support edge at that position's "
+    "CORE claim — the central thesis — not only at a peripheral sub-claim. For "
+    "continental drift, for example, physical evidence such as matching "
+    "coastlines, shared fossils across oceans, and aligning rock strata should "
+    "support the central 'the continents have moved / drifted' claim, not only "
+    "the narrower 'there was once a single supercontinent' sub-claim. It is fine "
+    "for a piece of evidence to also support a relevant sub-claim, but it must "
+    "not skip the core claim it most directly bears on. Route corroborating "
+    "evidence so it reaches the main contested claim of each position."
 )
 
 
