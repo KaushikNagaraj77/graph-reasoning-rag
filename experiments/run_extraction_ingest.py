@@ -37,9 +37,9 @@ PROPOSED = ROOT / "data" / "proposed_relationships.json"
 VERIFIED = ROOT / "data" / "verified_relationships.json"
 
 
-def extract_and_propose():
-    documents = load_documents(METADATA)
-    print(f"Loaded {len(documents)} documents across "
+def extract_and_propose(metadata=METADATA, proposed=PROPOSED):
+    documents = load_documents(metadata)
+    print(f"Loaded {len(documents)} documents from {Path(metadata).name} across "
           f"{len({d.topic for d in documents})} topics.\n")
 
     print("Extracting claims via LLM (reliability from metadata, not LLM-judged)...")
@@ -67,13 +67,12 @@ def extract_and_propose():
         print(f"  {r['from']}  --{r['type']}-->  {r['to']}")
         print(f"      rationale: {r['rationale']}")
 
-    write_proposed_relationships(claims, relationships, PROPOSED)
+    write_proposed_relationships(claims, relationships, proposed)
     print("\n" + "-" * 72)
     print(f"Wrote {len(claims)} claims and {len(relationships)} proposed "
-          f"relationships to:\n  {PROPOSED}")
+          f"relationships to:\n  {proposed}")
     print("\nSTOPPED before the engine. Review the proposed relationships above.")
-    print("To proceed: copy the reviewed file to")
-    print(f"  {VERIFIED}")
+    print("To proceed: copy the reviewed file to a verified file")
     print("(editing/removing any wrong relationships), then re-run with --run-engine.")
 
 
@@ -240,12 +239,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-engine", action="store_true",
                         help="Build the graph from the VERIFIED relationships file.")
+    parser.add_argument("--metadata", default=str(METADATA),
+                        help="Document metadata sidecar to extract from "
+                             "(e.g. a hard-case set). Default: the standard corpus.")
+    parser.add_argument("--proposed", default=str(PROPOSED),
+                        help="Where to write the proposed-relationships review file.")
     args = parser.parse_args()
     if args.run_engine:
         run_engine()
     else:
         try:
-            extract_and_propose()
+            extract_and_propose(metadata=args.metadata, proposed=args.proposed)
         except RuntimeError as e:
             # Clear, single-line failure (e.g. missing credentials) instead of
             # a traceback into the SDK.

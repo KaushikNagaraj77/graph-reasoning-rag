@@ -1,0 +1,41 @@
+{
+  "description": "HARD-CASE document set for Stage 1a: continental drift circa 1915, modeling the historical moment BEFORE the drift hypothesis was accepted. Reliability reflects each source's STANDING AT THE TIME (dismissed monograph = low, establishment consensus = high, field surveys = moderate), NOT modern hindsight and NOT reverse-engineered to make the engine win. The correct claim is deliberately the low-reliability underdog; ground_truth marks it because it is actually correct. Separate topic label and file so the existing corpus is untouched.",
+  "documents": [
+    {
+      "file": "drift1915_monograph.txt",
+      "topic": "continental_drift_1915",
+      "source": "Drifting-continents monograph (1915), dismissed by the geological establishment of the day",
+      "source_reliability": 0.42,
+      "ground_truth": true,
+      "role": "correct-but-dismissed underdog claim"
+    },
+    {
+      "file": "drift1915_establishment.txt",
+      "topic": "continental_drift_1915",
+      "source": "Authoritative geology textbook, early-20th-century fixist consensus",
+      "source_reliability": 0.83,
+      "role": "authoritative-but-wrong establishment claim"
+    },
+    {
+      "file": "drift1915_coastlines.txt",
+      "topic": "continental_drift_1915",
+      "source": "Atlantic coastline correspondence survey",
+      "source_reliability": 0.70,
+      "role": "field observation (corroborates drift)"
+    },
+    {
+      "file": "drift1915_fossils.txt",
+      "topic": "continental_drift_1915",
+      "source": "Palaeontological fossil-distribution records",
+      "source_reliability": 0.70,
+      "role": "field observation (corroborates drift)"
+    },
+    {
+      "file": "drift1915_strata.txt",
+      "topic": "continental_drift_1915",
+      "source": "Cross-Atlantic rock-strata and glacial-deposit field notes",
+      "source_reliability": 0.70,
+      "role": "field observation (corroborates drift)"
+    }
+  ]
+}
