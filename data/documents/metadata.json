@@ -1,0 +1,49 @@
+{
+  "description": "Document metadata sidecar for Stage 1a real-document ingestion. Reliability is PROVIDED here on source merit (not LLM-judged). role is a human note about what each document represents in the topic; it is NOT fed to the LLM and NOT used to force any relationship.",
+  "documents": [
+    {
+      "file": "drift_modern.txt",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.90,
+      "ground_truth": true,
+      "role": "correct-modern view"
+    },
+    {
+      "file": "drift_outdated.txt",
+      "topic": "continental_drift",
+      "source": "Fixist geology textbook, early 20th-century consensus",
+      "source_reliability": 0.45,
+      "role": "outdated-wrong view"
+    },
+    {
+      "file": "drift_evidence.txt",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "role": "supporting evidence"
+    },
+    {
+      "file": "ulcer_modern.txt",
+      "topic": "peptic_ulcers",
+      "source": "Marshall & Warren line of work, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.92,
+      "ground_truth": true,
+      "role": "correct-modern view"
+    },
+    {
+      "file": "ulcer_outdated.txt",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "role": "outdated-wrong view"
+    },
+    {
+      "file": "ulcer_evidence.txt",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "role": "supporting evidence"
+    }
+  ]
+}
