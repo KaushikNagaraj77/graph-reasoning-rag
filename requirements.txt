@@ -1,6 +1,6 @@
 networkx>=3.0
 numpy>=1.24
 
-# Extraction layer (graph_reasoning/extract.py) — Gemini API + structured output
-google-generativeai>=0.8
+# Extraction layer (graph_reasoning/extract.py) — Anthropic API + structured output
+anthropic>=0.39
 pydantic>=2.0

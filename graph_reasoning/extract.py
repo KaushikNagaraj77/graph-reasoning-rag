@@ -18,11 +18,12 @@ Output claim schema matches the hand-authored corpus exactly, so extracted
 claims drop straight into graph_reasoning.ingest.load_into_graph:
     {claim_id/id, claim_text, topic, source, source_reliability, ground_truth}
 
-Model: gemini-2.5-flash-lite via Google's Gemini API (override via
-extract_claims(..., model=...)). Requires the `google-generativeai` package and
-a key in GEMINI_API_KEY (or GOOGLE_API_KEY). If neither is available the call
-fails clearly. Structured JSON output is requested via Gemini's JSON mode
-(response_mime_type + response_schema) so parsing stays clean.
+Model: claude-sonnet-4-6 via Anthropic's API (override via
+extract_claims(..., model=...)). Requires the `anthropic` package and a key in
+ANTHROPIC_API_KEY (or ANTHROPIC_AUTH_TOKEN). If neither is available the call
+fails clearly. Structured JSON output is requested via a forced tool call whose
+input schema is the Pydantic model's JSON schema, so parsing stays clean (this
+also works on older SDKs that lack messages.parse).
 """
 
 import json
@@ -34,7 +35,7 @@ from pydantic import BaseModel, Field
 
 from .graph import ReasoningGraph, RelationType
 
-DEFAULT_MODEL = "gemini-2.5-flash-lite"
+DEFAULT_MODEL = "claude-sonnet-4-6"
 
 
 # ---------------------------------------------------------------------------
@@ -73,45 +74,44 @@ def load_documents(metadata_path):
 
 
 # ---------------------------------------------------------------------------
-# Gemini client helper — fail clearly if unavailable
+# Anthropic client helper — fail clearly if unavailable
 # ---------------------------------------------------------------------------
 
 def _get_api_key():
-    """Return the Gemini API key from GEMINI_API_KEY or GOOGLE_API_KEY, else None."""
+    """Return the Anthropic key from ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN."""
     import os
 
-    return os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    return os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")
 
 
 def _get_client():
     """
-    Configure the Gemini SDK and return the `genai` module, or raise a clear
-    error. The key is read from GEMINI_API_KEY (or GOOGLE_API_KEY) — we do NOT
-    silently proceed keyless.
+    Build an Anthropic client, or raise a clear error. The key is read from
+    ANTHROPIC_API_KEY (or ANTHROPIC_AUTH_TOKEN) — we do NOT silently proceed
+    keyless (the SDK constructor does not fail on a missing key; it only errors
+    at request time, so we check explicitly up front).
     """
     try:
-        import google.generativeai as genai
+        import anthropic
     except ImportError as e:
         raise RuntimeError(
-            "The `google-generativeai` package is required for LLM extraction. "
-            "Install it with `pip install google-generativeai`."
+            "The `anthropic` package is required for LLM extraction. "
+            "Install it with `pip install anthropic`."
         ) from e
 
-    api_key = _get_api_key()
-    if not api_key:
+    if not _get_api_key():
         raise RuntimeError(
-            "No Gemini credentials found. LLM extraction needs an API key. "
-            "Set GEMINI_API_KEY (or GOOGLE_API_KEY). Failing clearly rather "
-            "than proceeding without credentials."
+            "No Anthropic credentials found. LLM extraction needs an API key. "
+            "Set ANTHROPIC_API_KEY (or ANTHROPIC_AUTH_TOKEN). Failing clearly "
+            "rather than proceeding without credentials."
         )
 
     try:
-        genai.configure(api_key=api_key)
+        return anthropic.Anthropic()
     except Exception as e:  # noqa: BLE001 - surface the real cause to the caller
         raise RuntimeError(
-            f"Could not configure the Gemini client (underlying error: {e})."
+            f"Could not initialize the Anthropic client (underlying error: {e})."
         ) from e
-    return genai
 
 
 # ---------------------------------------------------------------------------
@@ -163,52 +163,58 @@ _BATCH_EXTRACTION_SYSTEM = _EXTRACTION_SYSTEM + (
 )
 
 
-def _structured_call(client, model, system, message, schema_model, tool_name=None,
-                     max_output_tokens=3000):
+def _structured_call(client, model, system, message, schema_model,
+                     tool_name="record_result", max_output_tokens=3000):
     """
-    Get schema-validated JSON from Gemini. Uses JSON mode (response_mime_type +
-    response_schema) so the model returns JSON matching `schema_model`, which we
-    then validate with Pydantic. `client` is the configured `genai` module;
-    `system` is passed as the model's system instruction. `tool_name` is unused
-    (kept for call-site compatibility). Returns a schema_model instance.
+    Get schema-validated JSON from Claude via a FORCED tool call: the tool's
+    input schema is `schema_model`'s JSON schema, and tool_choice pins that tool,
+    so `tool_use.input` is JSON matching the schema. `client` is an
+    anthropic.Anthropic client; `system` is the system prompt. This path works on
+    older SDKs that lack messages.parse. Returns a schema_model instance.
     """
     import time
 
-    from google.api_core import exceptions as g_exc
+    import anthropic
 
-    generative_model = client.GenerativeModel(
-        model_name=model,
-        system_instruction=system,
-    )
-    config = {
-        "response_mime_type": "application/json",
-        "response_schema": schema_model,
-        "max_output_tokens": max_output_tokens,
-    }
+    schema = schema_model.model_json_schema()
 
-    # Retry on 429 (free-tier per-minute rate limit), honoring the API's own
-    # retry_delay when present. A few paced retries clear the 5-rpm free tier;
-    # a persistent quota-exhausted error is reported clearly after the attempts.
+    # Retry transient rate limits/overloads with backoff, honoring retry-after
+    # when present; a persistent failure is reported clearly after the attempts.
     max_retries = 6
     for attempt in range(max_retries + 1):
         try:
-            response = generative_model.generate_content(message, generation_config=config)
-            return _lenient_validate(schema_model, response.text)
-        except g_exc.ResourceExhausted as e:
+            response = client.messages.create(
+                model=model,
+                max_tokens=max_output_tokens,
+                system=system,
+                tools=[{
+                    "name": tool_name,
+                    "description": "Return the structured result.",
+                    "input_schema": schema,
+                }],
+                tool_choice={"type": "tool", "name": tool_name},
+                messages=[{"role": "user", "content": message}],
+            )
+            tool_block = next(b for b in response.content if b.type == "tool_use")
+            return _lenient_validate(schema_model, json.dumps(tool_block.input))
+        except (anthropic.RateLimitError, anthropic.InternalServerError) as e:
             if attempt == max_retries:
                 raise RuntimeError(
-                    f"Gemini quota exhausted for model {model!r} after "
-                    f"{max_retries} retries. This is usually the per-day "
-                    "free-tier limit — retry after the daily reset (midnight "
-                    "Pacific), enable billing on the API key's project, or use "
-                    f"a model with remaining quota. (Underlying error: {e})"
+                    f"Anthropic API rate-limited/overloaded for model {model!r} "
+                    f"after {max_retries} retries. Retry later, check your plan "
+                    f"and credit balance, or lower request volume. "
+                    f"(Underlying error: {e})"
                 ) from e
-            suggested = getattr(getattr(e, "retry_delay", None), "seconds", 0) or 0
-            time.sleep(max(suggested, 20) + 1)
-        except g_exc.GoogleAPICallError as e:
-            # Not-found model, bad schema, permission, etc. — fail clearly.
+            retry_after = 0
+            try:
+                retry_after = int(e.response.headers.get("retry-after", "0"))
+            except Exception:  # noqa: BLE001 - header may be absent/non-numeric
+                retry_after = 0
+            time.sleep(max(retry_after, 2 ** attempt) + 1)
+        except anthropic.APIStatusError as e:
+            # Auth, billing, bad request (e.g. bad model/schema) — fail clearly.
             raise RuntimeError(
-                f"Gemini API call failed for model {model!r}: {e}"
+                f"Anthropic API call failed for model {model!r}: {e}"
             ) from e
 
 

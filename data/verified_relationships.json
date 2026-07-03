@@ -1,0 +1,537 @@
+{
+  "description": "REVIEW REQUIRED. LLM-extracted claims and LLM-PROPOSED relationships. Inspect and approve the relationships before running the engine. Reliability is from document metadata, not LLM-judged.",
+  "status": "proposed_unverified",
+  "claims": [
+    {
+      "id": "drift_modern_c0",
+      "claim_text": "Over geological timescales, the continents are not fixed.",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.9,
+      "ground_truth": true,
+      "doc_id": "drift_modern"
+    },
+    {
+      "id": "drift_modern_c1",
+      "claim_text": "The continents move slowly across the surface of the Earth.",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.9,
+      "ground_truth": true,
+      "doc_id": "drift_modern"
+    },
+    {
+      "id": "drift_modern_c2",
+      "claim_text": "The landmasses we see today drifted apart from a single ancestral supercontinent.",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.9,
+      "ground_truth": true,
+      "doc_id": "drift_modern"
+    },
+    {
+      "id": "drift_modern_c3",
+      "claim_text": "Plate tectonics provides the mechanism for continental movement.",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.9,
+      "ground_truth": true,
+      "doc_id": "drift_modern"
+    },
+    {
+      "id": "drift_modern_c4",
+      "claim_text": "Rigid plates carry the continents on the slowly convecting mantle beneath them.",
+      "topic": "continental_drift",
+      "source": "Modern geology textbook (plate tectonics), current",
+      "source_reliability": 0.9,
+      "ground_truth": true,
+      "doc_id": "drift_modern"
+    },
+    {
+      "id": "drift_outdated_c0",
+      "claim_text": "The continents are permanent and fixed in their positions.",
+      "topic": "continental_drift",
+      "source": "Fixist geology textbook, early 20th-century consensus",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "drift_outdated"
+    },
+    {
+      "id": "drift_outdated_c1",
+      "claim_text": "The apparent fit between facing coastlines is mere coincidence.",
+      "topic": "continental_drift",
+      "source": "Fixist geology textbook, early 20th-century consensus",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "drift_outdated"
+    },
+    {
+      "id": "drift_outdated_c2",
+      "claim_text": "The presence of identical fossils on widely separated continents is explained by ancient land bridges that later sank beneath the oceans.",
+      "topic": "continental_drift",
+      "source": "Fixist geology textbook, early 20th-century consensus",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "drift_outdated"
+    },
+    {
+      "id": "drift_outdated_c3",
+      "claim_text": "There is no mechanism by which continents could move.",
+      "topic": "continental_drift",
+      "source": "Fixist geology textbook, early 20th-century consensus",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "drift_outdated"
+    },
+    {
+      "id": "drift_evidence_c0",
+      "claim_text": "Several independent lines of evidence support the movement of continents.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "drift_evidence_c1",
+      "claim_text": "The coastlines of facing continents fit together like puzzle pieces.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "drift_evidence_c2",
+      "claim_text": "Identical fossil species appear on continents now separated by oceans.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "drift_evidence_c3",
+      "claim_text": "Matching rock strata line up across ocean margins.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "drift_evidence_c4",
+      "claim_text": "Matching mountain belts line up across ocean margins.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "drift_evidence_c5",
+      "claim_text": "Mid-ocean ridges show symmetric magnetic striping consistent with seafloor spreading.",
+      "topic": "continental_drift",
+      "source": "Compiled field-observation survey",
+      "source_reliability": 0.72,
+      "ground_truth": false,
+      "doc_id": "drift_evidence"
+    },
+    {
+      "id": "ulcer_modern_c0",
+      "claim_text": "Most peptic ulcers are caused by infection with the bacterium Helicobacter pylori.",
+      "topic": "peptic_ulcers",
+      "source": "Marshall & Warren line of work, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.92,
+      "ground_truth": true,
+      "doc_id": "ulcer_modern"
+    },
+    {
+      "id": "ulcer_modern_c1",
+      "claim_text": "The standard treatment for peptic ulcers is a course of antibiotics.",
+      "topic": "peptic_ulcers",
+      "source": "Marshall & Warren line of work, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.92,
+      "ground_truth": true,
+      "doc_id": "ulcer_modern"
+    },
+    {
+      "id": "ulcer_modern_c2",
+      "claim_text": "Antibiotic treatment eradicates the Helicobacter pylori infection and allows the ulcer to heal.",
+      "topic": "peptic_ulcers",
+      "source": "Marshall & Warren line of work, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.92,
+      "ground_truth": true,
+      "doc_id": "ulcer_modern"
+    },
+    {
+      "id": "ulcer_modern_c3",
+      "claim_text": "Acid-suppressing drugs support healing of peptic ulcers but do not address the root cause.",
+      "topic": "peptic_ulcers",
+      "source": "Marshall & Warren line of work, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.92,
+      "ground_truth": true,
+      "doc_id": "ulcer_modern"
+    },
+    {
+      "id": "ulcer_outdated_c0",
+      "claim_text": "Peptic ulcers are caused by psychological stress.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_outdated_c1",
+      "claim_text": "Peptic ulcers are caused by eating spicy food.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_outdated_c2",
+      "claim_text": "The stomach is too acidic an environment for any bacteria to survive.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_outdated_c3",
+      "claim_text": "Bacterial infection plays no role in peptic ulcers.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_outdated_c4",
+      "claim_text": "Peptic ulcers are best managed with rest and stress reduction.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_outdated_c5",
+      "claim_text": "Peptic ulcers are best managed with a bland diet that avoids irritating foods.",
+      "topic": "peptic_ulcers",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45,
+      "ground_truth": false,
+      "doc_id": "ulcer_outdated"
+    },
+    {
+      "id": "ulcer_evidence_c0",
+      "claim_text": "Laboratory and clinical findings support a bacterial cause for peptic ulcers.",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "ground_truth": false,
+      "doc_id": "ulcer_evidence"
+    },
+    {
+      "id": "ulcer_evidence_c1",
+      "claim_text": "Curved bacteria are visible on biopsy of inflamed stomach lining.",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "ground_truth": false,
+      "doc_id": "ulcer_evidence"
+    },
+    {
+      "id": "ulcer_evidence_c2",
+      "claim_text": "The organism associated with peptic ulcers has been cultured from gastric tissue.",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "ground_truth": false,
+      "doc_id": "ulcer_evidence"
+    },
+    {
+      "id": "ulcer_evidence_c3",
+      "claim_text": "A researcher deliberately ingested the organism and developed gastritis.",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "ground_truth": false,
+      "doc_id": "ulcer_evidence"
+    },
+    {
+      "id": "ulcer_evidence_c4",
+      "claim_text": "Antibiotic treatment cleared both the bacterial infection and the ulcer together.",
+      "topic": "peptic_ulcers",
+      "source": "Compiled laboratory and clinical findings",
+      "source_reliability": 0.73,
+      "ground_truth": false,
+      "doc_id": "ulcer_evidence"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "drift_modern_c1",
+      "to": "drift_modern_c0",
+      "type": "support",
+      "rationale": "The slow movement of continents across Earth's surface directly illustrates that they are not fixed over geological timescales."
+    },
+    {
+      "from": "drift_modern_c2",
+      "to": "drift_modern_c0",
+      "type": "support",
+      "rationale": "Landmasses drifting apart from a single supercontinent confirms that continents are not fixed in their positions."
+    },
+    {
+      "from": "drift_modern_c3",
+      "to": "drift_modern_c1",
+      "type": "support",
+      "rationale": "Plate tectonics provides the physical mechanism that explains how continents move slowly across Earth's surface."
+    },
+    {
+      "from": "drift_modern_c4",
+      "to": "drift_modern_c3",
+      "type": "support",
+      "rationale": "The description of rigid plates carried by convecting mantle elaborates on and supports the plate tectonics mechanism."
+    },
+    {
+      "from": "drift_modern_c4",
+      "to": "drift_modern_c1",
+      "type": "support",
+      "rationale": "Mantle convection carrying rigid plates directly explains the slow movement of continents."
+    },
+    {
+      "from": "drift_evidence_c0",
+      "to": "drift_modern_c0",
+      "type": "support",
+      "rationale": "Multiple independent lines of evidence reinforce the conclusion that continents are not fixed."
+    },
+    {
+      "from": "drift_evidence_c0",
+      "to": "drift_modern_c1",
+      "type": "support",
+      "rationale": "Independent lines of evidence collectively support the claim that continents move across Earth's surface."
+    },
+    {
+      "from": "drift_evidence_c1",
+      "to": "drift_outdated_c1",
+      "type": "contradiction",
+      "rationale": "A puzzle-piece fit of coastlines is a systematic match, directly contradicting the claim that it is mere coincidence."
+    },
+    {
+      "from": "drift_evidence_c1",
+      "to": "drift_evidence_c0",
+      "type": "support",
+      "rationale": "The coastline fit is one of the independent lines of evidence supporting continental movement."
+    },
+    {
+      "from": "drift_evidence_c2",
+      "to": "drift_evidence_c0",
+      "type": "support",
+      "rationale": "Identical fossils on separated continents constitute one of the independent lines of evidence for continental drift."
+    },
+    {
+      "from": "drift_evidence_c2",
+      "to": "drift_modern_c2",
+      "type": "support",
+      "rationale": "Identical fossil species on now-separated continents supports the idea that those landmasses were once joined in a single supercontinent."
+    },
+    {
+      "from": "drift_evidence_c3",
+      "to": "drift_evidence_c0",
+      "type": "support",
+      "rationale": "Matching rock strata across ocean margins is one of the independent lines of evidence for continental movement."
+    },
+    {
+      "from": "drift_evidence_c4",
+      "to": "drift_evidence_c0",
+      "type": "support",
+      "rationale": "Matching mountain belts across ocean margins constitute another independent line of evidence for continental drift."
+    },
+    {
+      "from": "drift_evidence_c5",
+      "to": "drift_evidence_c0",
+      "type": "support",
+      "rationale": "Symmetric magnetic striping at mid-ocean ridges is an independent line of evidence consistent with seafloor spreading and continental movement."
+    },
+    {
+      "from": "drift_evidence_c5",
+      "to": "drift_modern_c3",
+      "type": "support",
+      "rationale": "Magnetic striping is direct observational evidence for seafloor spreading, a key component of plate tectonics."
+    },
+    {
+      "from": "drift_modern_c3",
+      "to": "drift_outdated_c3",
+      "type": "contradiction",
+      "rationale": "Plate tectonics provides exactly the mechanism that the outdated claim asserts does not exist."
+    },
+    {
+      "from": "drift_modern_c4",
+      "to": "drift_outdated_c3",
+      "type": "contradiction",
+      "rationale": "Mantle convection driving rigid plates is a concrete mechanism for continental movement, refuting the claim that no such mechanism exists."
+    },
+    {
+      "from": "drift_modern_c0",
+      "to": "drift_outdated_c0",
+      "type": "contradiction",
+      "rationale": "Continents being non-fixed over geological timescales directly contradicts the claim that they are permanent and fixed."
+    },
+    {
+      "from": "drift_modern_c1",
+      "to": "drift_outdated_c0",
+      "type": "contradiction",
+      "rationale": "Continents moving slowly across Earth's surface is irreconcilable with the claim that they are fixed in position."
+    },
+    {
+      "from": "drift_evidence_c0",
+      "to": "drift_outdated_c0",
+      "type": "contradiction",
+      "rationale": "Multiple independent lines of evidence for movement directly contradict the assertion that continents are fixed."
+    },
+    {
+      "from": "drift_evidence_c2",
+      "to": "drift_outdated_c2",
+      "type": "contradiction",
+      "rationale": "Continental drift explains identical fossils on separated continents without requiring land bridges that later sank, making the land-bridge explanation unnecessary."
+    },
+    {
+      "from": "ulcer_modern_c0",
+      "to": "ulcer_outdated_c0",
+      "type": "contradiction",
+      "rationale": "A bacterial cause for most peptic ulcers contradicts the claim that they are caused by psychological stress."
+    },
+    {
+      "from": "ulcer_modern_c0",
+      "to": "ulcer_outdated_c1",
+      "type": "contradiction",
+      "rationale": "A bacterial cause for most peptic ulcers contradicts the claim that they are caused by spicy food."
+    },
+    {
+      "from": "ulcer_modern_c0",
+      "to": "ulcer_outdated_c3",
+      "type": "contradiction",
+      "rationale": "H. pylori being the primary cause of peptic ulcers directly contradicts the claim that bacterial infection plays no role."
+    },
+    {
+      "from": "ulcer_modern_c1",
+      "to": "ulcer_outdated_c4",
+      "type": "contradiction",
+      "rationale": "Antibiotic treatment as the standard care contradicts the claim that rest and stress reduction are the best management."
+    },
+    {
+      "from": "ulcer_modern_c1",
+      "to": "ulcer_outdated_c5",
+      "type": "contradiction",
+      "rationale": "Antibiotic treatment as the standard care contradicts the claim that a bland diet is the best management."
+    },
+    {
+      "from": "ulcer_modern_c2",
+      "to": "ulcer_modern_c1",
+      "type": "support",
+      "rationale": "The fact that antibiotics eradicate H. pylori and allow healing explains why antibiotic treatment is the standard approach."
+    },
+    {
+      "from": "ulcer_modern_c2",
+      "to": "ulcer_modern_c0",
+      "type": "support",
+      "rationale": "Antibiotic eradication of H. pylori leading to ulcer healing reinforces that H. pylori infection is the cause of most ulcers."
+    },
+   
+    {
+      "from": "ulcer_modern_c3",
+      "to": "ulcer_modern_c2",
+      "type": "support",
+      "rationale": "Acid suppressants not addressing the root cause supports the primacy of antibiotic treatment to eradicate H. pylori."
+    },
+    {
+      "from": "ulcer_outdated_c2",
+      "to": "ulcer_modern_c0",
+      "type": "contradiction",
+      "rationale": "The claim that no bacteria can survive in the stomach contradicts the finding that H. pylori infects and causes ulcers there."
+    },
+    {
+      "from": "ulcer_outdated_c2",
+      "to": "ulcer_outdated_c3",
+      "type": "support",
+      "rationale": "Believing the stomach is too acidic for bacteria supports the conclusion that bacterial infection plays no role in ulcers."
+    },
+    {
+      "from": "ulcer_evidence_c0",
+      "to": "ulcer_modern_c0",
+      "type": "support",
+      "rationale": "Laboratory and clinical findings supporting a bacterial cause directly reinforce the claim that H. pylori causes most peptic ulcers."
+    },
+    {
+      "from": "ulcer_evidence_c1",
+      "to": "ulcer_evidence_c0",
+      "type": "support",
+      "rationale": "Visible curved bacteria on biopsy of inflamed stomach lining is one of the laboratory findings supporting a bacterial cause."
+    },
+    {
+      "from": "ulcer_evidence_c1",
+      "to": "ulcer_outdated_c2",
+      "type": "contradiction",
+      "rationale": "Bacteria visibly present in gastric tissue directly contradicts the claim that the stomach is too acidic for bacteria to survive."
+    },
+    {
+      "from": "ulcer_evidence_c2",
+      "to": "ulcer_evidence_c0",
+      "type": "support",
+      "rationale": "Successful culturing of the organism from gastric tissue is a key laboratory finding supporting a bacterial cause."
+    },
+    {
+      "from": "ulcer_evidence_c2",
+      "to": "ulcer_outdated_c2",
+      "type": "contradiction",
+      "rationale": "Culturing bacteria from gastric tissue proves bacteria can survive in the stomach, contradicting the claim they cannot."
+    },
+    {
+      "from": "ulcer_evidence_c3",
+      "to": "ulcer_evidence_c0",
+      "type": "support",
+      "rationale": "A researcher deliberately ingesting the organism and developing gastritis is a clinical demonstration of the bacterial cause."
+    },
+    {
+      "from": "ulcer_evidence_c3",
+      "to": "ulcer_outdated_c3",
+      "type": "contradiction",
+      "rationale": "Deliberate ingestion causing gastritis proves bacteria do play a causal role, directly contradicting the claim they play no role."
+    },
+    {
+      "from": "ulcer_evidence_c4",
+      "to": "ulcer_evidence_c0",
+      "type": "support",
+      "rationale": "Antibiotic treatment clearing both infection and ulcer simultaneously is a clinical finding that supports the bacterial cause."
+    },
+    {
+      "from": "ulcer_evidence_c4",
+      "to": "ulcer_modern_c2",
+      "type": "support",
+      "rationale": "Observing that antibiotics clear the infection and heal the ulcer together directly supports the mechanism described in this claim."
+    },
+    {
+      "from": "ulcer_evidence_c4",
+      "to": "ulcer_outdated_c3",
+      "type": "contradiction",
+      "rationale": "Antibiotics resolving ulcers by clearing bacteria proves that bacterial infection does play a role in peptic ulcers."
+    },
+    {
+      "from": "ulcer_evidence_c4",
+      "to": "ulcer_outdated_c4",
+      "type": "contradiction",
+      "rationale": "Antibiotic treatment resolving ulcers contradicts the claim that rest and stress reduction are the best management."
+    },
+    {
+      "from": "ulcer_evidence_c4",
+      "to": "ulcer_outdated_c5",
+      "type": "contradiction",
+      "rationale": "Antibiotic treatment resolving ulcers contradicts the claim that a bland diet is the best management."
+    }
+  ]
+}
