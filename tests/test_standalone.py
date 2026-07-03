@@ -52,11 +52,15 @@ conf_c_after = g.graph.nodes['C']['confidence']
 assert conf_c_after < conf_c_before, "C should lose confidence in resolution"
 print(f"3. resolution: C {conf_c_before:.3f} -> {conf_c_after:.3f}")
 
-# 4. Pruning moves weak nodes to rejected_thoughts
+# 4. Pruning moves weak conflict-free nodes to rejected_thoughts; nodes in a
+#    contradiction are tagged (conflicts_with) and protected from pruning
+g.add_thought('D', 'Unrelated stray note with no backing', confidence=0.35)
 removed = g.prune_low_confidence(threshold=0.5)
-assert removed >= 1, "at least one penalized node should fall below 0.5"
+assert removed == 1 and 'D' in g.rejected_thoughts, "weak conflict-free node should be pruned"
+assert all(n in g.graph.nodes for n in 'ABC'), "conflicted nodes must survive pruning"
 assert len(g.rejected_thoughts) == removed
-print(f"4. pruned {removed} node(s) -> rejected_thoughts: {list(g.rejected_thoughts)}")
+print(f"4. pruned {removed} node(s) -> rejected_thoughts: {list(g.rejected_thoughts)}; "
+      f"conflicted nodes kept: {sorted(n for n in g.graph.nodes)}")
 
 # 5. Reconsideration can readmit (20% bump over 0.4 threshold)
 readded = g.reconsider_rejected_thoughts(confidence_threshold=0.4)

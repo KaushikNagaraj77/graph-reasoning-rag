@@ -10,9 +10,13 @@ Extracted from the Binance_TradeX project's TradingThoughtGraph
   - Confidence is refined from GRAPH STRUCTURE: well-supported nodes gain
     confidence, contradicted nodes lose it, confluence amplifies.
   - Contradictions are detected (edge-based and, optionally, keyword-based),
-    then resolved by penalizing both sides.
+    tagged on both nodes' metadata (`conflicts_with`), and resolved by a
+    small relative-reliability re-ranking. Contested knowledge is KEPT and
+    surfaced, not destroyed (the source project penalized both sides toward
+    0 and pruned them — wrong for a knowledge/RAG system).
   - Low-confidence nodes are pruned into `rejected_thoughts` (memory
-    retention) and may later be readmitted by `reconsider_rejected_thoughts`.
+    retention) and may later be readmitted by `reconsider_rejected_thoughts`;
+    conflict-tagged nodes are protected from pruning.
 
 Changes from the original (see docs/PRIOR_PROJECT_FINDINGS.md for the source
 project's lessons):
@@ -260,14 +264,34 @@ class ReasoningGraph:
                             f"({pos_conf:.2f} vs {neg_conf:.2f})",
                             "high"))
 
+        # Record each conflict on BOTH nodes' metadata so contested knowledge
+        # stays queryable at retrieval time (kept and surfaced, not destroyed).
+        for node1, node2, reason, severity in contradictions:
+            for node, other in ((node1, node2), (node2, node1)):
+                if node not in self.graph.nodes:
+                    continue
+                conflicts = (self.graph.nodes[node]
+                             .setdefault('metadata', {})
+                             .setdefault('conflicts_with', []))
+                if not any(c.get('node') == other and c.get('severity') == severity
+                           for c in conflicts):
+                    conflicts.append({'node': other,
+                                      'severity': severity,
+                                      'reason': reason})
+
         if verbose:
             print(f"[{self.name}] contradictions found: {len(contradictions)}")
         return contradictions
 
-    def resolve_contradictions(self, contradictions=None, verbose=False):
+    def resolve_contradictions(self, contradictions=None, verbose=False,
+                               min_confidence=0.15):
         """
-        Penalize both sides of each contradiction:
-        high -0.30, medium -0.20, low -0.10 confidence.
+        Re-rank both sides of each contradiction instead of destroying them.
+        A small penalty (high -0.10, medium -0.06, low -0.03) is split by
+        relative reliability — the less confident node absorbs the larger
+        share — so the more reliable node stays ranked above the other, and
+        neither is driven toward 0. Node confidence (the reliability proxy
+        for now) never drops below `min_confidence` purely due to conflict.
         Returns the number of contradictions resolved.
         """
         if contradictions is None:
@@ -275,16 +299,21 @@ class ReasoningGraph:
         if not contradictions:
             return 0
 
-        penalty_map = {'high': 0.3, 'medium': 0.2, 'low': 0.1}
+        penalty_map = {'high': 0.10, 'medium': 0.06, 'low': 0.03}
         for node1, node2, reason, severity in contradictions:
-            penalty = penalty_map.get(severity, 0.15)
-            for node in {node1, node2}:
-                if node in self.graph.nodes:
-                    old = self.graph.nodes[node].get('confidence', 0.5)
-                    self.graph.nodes[node]['confidence'] = max(0.0, old - penalty)
-                    if verbose:
-                        print(f"  {node}: {old:.3f} -> "
-                              f"{self.graph.nodes[node]['confidence']:.3f} ({reason})")
+            base_penalty = penalty_map.get(severity, 0.06)
+            confs = {node: self.graph.nodes[node].get('confidence', 0.5)
+                     for node in {node1, node2} if node in self.graph.nodes}
+            total = sum(confs.values())
+            for node, old in confs.items():
+                if len(confs) == 2 and total > 0:
+                    share = (total - old) / total  # weaker side absorbs more
+                else:
+                    share = 0.5  # self-contradiction or degenerate pair
+                new = max(min(old, min_confidence), old - base_penalty * share)
+                self.graph.nodes[node]['confidence'] = new
+                if verbose:
+                    print(f"  {node}: {old:.3f} -> {new:.3f} ({reason})")
         return len(contradictions)
 
     # ------------------------------------------------------------------
@@ -311,9 +340,16 @@ class ReasoningGraph:
         return len(nodes_to_remove)
 
     def prune_low_confidence(self, threshold=0.5):
-        """Move nodes below the confidence threshold into rejected_thoughts."""
+        """Move nodes below the confidence threshold into rejected_thoughts.
+
+        Contested nodes (non-empty `conflicts_with` metadata) are never
+        pruned here: a conflict marks valuable knowledge that must remain
+        available to surface at query time. Only genuinely unsupported,
+        conflict-free nodes are removed.
+        """
         nodes_to_remove = [n for n, d in self.graph.nodes(data=True)
-                           if d.get('confidence', 0) < threshold]
+                           if d.get('confidence', 0) < threshold
+                           and not d.get('metadata', {}).get('conflicts_with')]
         for node in nodes_to_remove:
             self.rejected_thoughts[node] = {
                 'content': self.graph.nodes[node].get('content', ''),
