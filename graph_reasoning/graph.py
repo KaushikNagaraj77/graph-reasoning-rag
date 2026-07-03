@@ -213,11 +213,13 @@ class ReasoningGraph:
     # Contradictions
     # ------------------------------------------------------------------
 
-    def detect_contradictions(self, confidence_threshold=0.5, verbose=False):
+    def detect_contradictions(self, confidence_threshold=0.5,
+                              strong_confidence=0.6, verbose=False):
         """
         Detect contradictions two ways:
-          1. Edge-based: an explicit CONTRADICTION edge between two nodes that
-             BOTH hold confidence > 0.6 (severity: high).
+          1. Edge-based: an explicit CONTRADICTION edge fires when the MORE
+             confident of the two linked nodes clears `strong_confidence`
+             (~0.6). It does NOT require both sides to be confident.
           2. Semantic (only if polarity keywords were provided): every pair of
              high-confidence nodes on opposite polarities contradicts
              (severity: high); a single node matching both polarities
@@ -235,10 +237,18 @@ class ReasoningGraph:
             for pred in self.graph.predecessors(node):
                 if self.graph[pred][node].get('type', '') == RelationType.CONTRADICTION.value:
                     pred_conf = self.graph.nodes[pred].get('confidence', 0.5)
-                    if conf > 0.6 and pred_conf > 0.6:
+                    # Fire on the STRONGER side clearing the bar, not both.
+                    # The trading-era "both > 0.6" gate could not see a weak
+                    # outdated claim contradicting a strong recent one — which
+                    # is exactly the RAG case (superseded source vs current
+                    # evidence). Requiring at least one confident side still
+                    # keeps two genuine-junk low-confidence nodes from
+                    # spuriously flagging each other.
+                    if max(conf, pred_conf) > strong_confidence:
                         contradictions.append((
                             pred, node,
-                            "Both nodes have high confidence but contradict each other",
+                            "Linked claims of opposite polarity; at least one "
+                            "is confident (weak-vs-strong conflicts count)",
                             "high"))
 
             if self.positive_keywords or self.negative_keywords:

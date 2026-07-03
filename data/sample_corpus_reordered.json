@@ -1,0 +1,407 @@
+{
+  "description": "Hand-authored corpus for the contradiction-handling experiment. Each topic contains sources that genuinely conflict, with the currently-correct claim flagged ground_truth. Reliability reflects source type and recency (peer-reviewed-recent ~0.9, guideline ~0.85, old-textbook ~0.5, blog ~0.3). Content is simplified test material for a retrieval experiment, NOT medical advice.",
+  "claims": [
+    {
+      "id": "ulcer_bacteria",
+      "topic": "peptic_ulcers",
+      "claim_text": "Most peptic ulcers are caused by Helicobacter pylori infection and are treated with antibiotics.",
+      "source": "Marshall & Warren, peer-reviewed (Nobel 2005)",
+      "source_reliability": 0.95,
+      "ground_truth": true
+    },
+    {
+      "id": "ulcer_stress",
+      "topic": "peptic_ulcers",
+      "claim_text": "Peptic ulcers are caused by stress and spicy food, and are managed with rest and a bland diet.",
+      "source": "General health textbook, 1970s edition",
+      "source_reliability": 0.45
+    },
+    {
+      "id": "ulcer_acid_only",
+      "topic": "peptic_ulcers",
+      "claim_text": "Ulcers are purely an excess-acid problem with no infectious cause.",
+      "source": "Wellness blog",
+      "source_reliability": 0.22
+    },
+    {
+      "id": "fat_saturated_recent",
+      "topic": "dietary_fat",
+      "claim_text": "Replacing saturated fat with unsaturated fat lowers cardiovascular risk.",
+      "source": "Cochrane systematic review, recent",
+      "source_reliability": 0.9,
+      "ground_truth": true
+    },
+    {
+      "id": "fat_all_bad",
+      "topic": "dietary_fat",
+      "claim_text": "All dietary fat is harmful and should be minimized regardless of type.",
+      "source": "Diet advice pamphlet, 1980s",
+      "source_reliability": 0.35
+    },
+    {
+      "id": "fat_supports_recent",
+      "topic": "dietary_fat",
+      "claim_text": "Distinguishing fat types matters: unsaturated fats are protective for the heart.",
+      "source": "Cardiology guideline, current",
+      "source_reliability": 0.85
+    },
+    {
+      "id": "bedrest_harmful",
+      "topic": "back_pain",
+      "claim_text": "Prolonged bed rest worsens acute low back pain; staying active speeds recovery.",
+      "source": "Clinical practice guideline, recent",
+      "source_reliability": 0.88,
+      "ground_truth": true
+    },
+    {
+      "id": "bedrest_helpful",
+      "topic": "back_pain",
+      "claim_text": "Strict bed rest for a week or more is the primary treatment for low back pain.",
+      "source": "Orthopedics textbook, 1980s edition",
+      "source_reliability": 0.48
+    },
+    {
+      "id": "bedrest_supports_active",
+      "topic": "back_pain",
+      "claim_text": "Early mobilization improves outcomes in acute low back pain versus bed rest.",
+      "source": "Physiotherapy trial, peer-reviewed",
+      "source_reliability": 0.82
+    },
+    {
+      "id": "bedrest_blog",
+      "topic": "back_pain",
+      "claim_text": "Lie flat and avoid all movement until back pain disappears completely.",
+      "source": "Health forum post",
+      "source_reliability": 0.18
+    },
+    {
+      "id": "vitc_no_cure",
+      "topic": "vitamin_c_colds",
+      "claim_text": "Vitamin C does not prevent common colds in the general population; it slightly shortens duration.",
+      "source": "Cochrane review, recent",
+      "source_reliability": 0.9,
+      "ground_truth": true
+    },
+    {
+      "id": "vitc_prevents",
+      "topic": "vitamin_c_colds",
+      "claim_text": "High-dose vitamin C prevents the common cold in everyone.",
+      "source": "Popular science book, 1970s",
+      "source_reliability": 0.38
+    },
+    {
+      "id": "vitc_megadose_blog",
+      "topic": "vitamin_c_colds",
+      "claim_text": "Megadosing vitamin C reliably stops any cold before it starts.",
+      "source": "Supplement seller blog",
+      "source_reliability": 0.15
+    },
+    {
+      "id": "vitc_supports_recent",
+      "topic": "vitamin_c_colds",
+      "claim_text": "Routine vitamin C supplementation shows no meaningful preventive effect on cold incidence.",
+      "source": "Nutrition meta-analysis, current",
+      "source_reliability": 0.85
+    },
+    {
+      "id": "hydration_8cups_myth",
+      "topic": "hydration",
+      "claim_text": "There is no strong evidence that everyone must drink exactly eight glasses of water daily; needs vary.",
+      "source": "Physiology review, peer-reviewed",
+      "source_reliability": 0.88,
+      "ground_truth": true
+    },
+    {
+      "id": "hydration_8cups_rule",
+      "topic": "hydration",
+      "claim_text": "Everyone must drink eight glasses of water every day or risk dehydration.",
+      "source": "Lifestyle magazine, older",
+      "source_reliability": 0.4
+    },
+    {
+      "id": "hydration_supports_varies",
+      "topic": "hydration",
+      "claim_text": "Daily fluid needs depend on body size, activity, and climate; food contributes too.",
+      "source": "Dietetics association guidance, current",
+      "source_reliability": 0.83
+    },
+    {
+      "id": "drift_fixist",
+      "topic": "continental_drift",
+      "claim_text": "Continents are fixed in place; apparent fits are coincidental and land bridges explain shared fossils.",
+      "source": "Authoritative geology textbook consensus of the era",
+      "source_reliability": 0.85
+    },
+    {
+      "id": "drift_ev_seafloor",
+      "topic": "continental_drift",
+      "claim_text": "Observation: mid-ocean ridges show symmetric magnetic striping consistent with spreading.",
+      "source": "Ocean magnetic survey",
+      "source_reliability": 0.74
+    },
+    {
+      "id": "drift_ev_glacial",
+      "topic": "continental_drift",
+      "claim_text": "Observation: ancient glacial deposits occur in regions now near the equator.",
+      "source": "Glaciology records",
+      "source_reliability": 0.68
+    },
+    {
+      "id": "drift_ev_coastlines",
+      "topic": "continental_drift",
+      "claim_text": "Observation: the coastlines of facing continents fit together like puzzle pieces.",
+      "source": "Cartographic survey",
+      "source_reliability": 0.7
+    },
+    {
+      "id": "drift_ev_rockstrata",
+      "topic": "continental_drift",
+      "claim_text": "Observation: matching rock strata and mountain belts line up across ocean margins.",
+      "source": "Field geology survey",
+      "source_reliability": 0.7
+    },
+    {
+      "id": "drift_ev_fossils",
+      "topic": "continental_drift",
+      "claim_text": "Observation: identical fossil species appear on now-separated continents.",
+      "source": "Paleontology field catalog",
+      "source_reliability": 0.72
+    },
+    {
+      "id": "drift_mobilist",
+      "topic": "continental_drift",
+      "claim_text": "The continents move over geological time; today's continents drifted apart from a single landmass.",
+      "source": "Meteorologist's monograph, initially dismissed by geologists",
+      "source_reliability": 0.45,
+      "ground_truth": true
+    },
+    {
+      "id": "childbed_handwash",
+      "topic": "puerperal_fever",
+      "claim_text": "Childbed fever is transmitted on the hands of clinicians; hand disinfection sharply reduces deaths.",
+      "source": "Obstetric ward clinician, ridiculed by contemporaries",
+      "source_reliability": 0.42,
+      "ground_truth": true
+    },
+    {
+      "id": "childbed_miasma",
+      "topic": "puerperal_fever",
+      "claim_text": "Childbed fever arises from bad air (miasma) and imbalance of humors, not anything on the hands.",
+      "source": "Established medical faculty doctrine of the era",
+      "source_reliability": 0.8
+    },
+    {
+      "id": "childbed_ev_wards",
+      "topic": "puerperal_fever",
+      "claim_text": "Observation: the doctor-run ward had far higher maternal mortality than the midwife-run ward.",
+      "source": "Hospital admission and mortality registers",
+      "source_reliability": 0.72
+    },
+    {
+      "id": "childbed_ev_autopsy",
+      "topic": "puerperal_fever",
+      "claim_text": "Observation: deaths dropped sharply after staff began disinfecting hands post-autopsy.",
+      "source": "Ward intervention record",
+      "source_reliability": 0.7
+    },
+    {
+      "id": "childbed_ev_cadaver",
+      "topic": "puerperal_fever",
+      "claim_text": "Observation: a colleague died of the same fever after a cut sustained during an autopsy.",
+      "source": "Case report",
+      "source_reliability": 0.66
+    },
+    {
+      "id": "childbed_ev_seasonal",
+      "topic": "puerperal_fever",
+      "claim_text": "Observation: fever rates tracked contact with autopsy material, not ward air quality or season.",
+      "source": "Ward statistical comparison",
+      "source_reliability": 0.68
+    },
+    {
+      "id": "gastritis_infection",
+      "topic": "chronic_gastritis",
+      "claim_text": "Chronic gastritis is driven by a bacterial infection of the stomach lining and resolves with antibiotics.",
+      "source": "Early case series, dismissed by prevailing acid-theory experts",
+      "source_reliability": 0.5,
+      "ground_truth": true
+    },
+    {
+      "id": "gastritis_acid",
+      "topic": "chronic_gastritis",
+      "claim_text": "Chronic gastritis is purely a disorder of excess acid and lifestyle; the stomach is too acidic for bacteria.",
+      "source": "Authoritative gastroenterology consensus of the era",
+      "source_reliability": 0.83
+    },
+    {
+      "id": "gastritis_ev_biopsy",
+      "topic": "chronic_gastritis",
+      "claim_text": "Observation: curved bacteria are visible on biopsy of inflamed stomach lining.",
+      "source": "Histopathology slides",
+      "source_reliability": 0.73
+    },
+    {
+      "id": "gastritis_ev_culture",
+      "topic": "chronic_gastritis",
+      "claim_text": "Observation: the organism was cultured from gastric tissue in the lab.",
+      "source": "Microbiology culture record",
+      "source_reliability": 0.72
+    },
+    {
+      "id": "gastritis_ev_selfexp",
+      "topic": "chronic_gastritis",
+      "claim_text": "Observation: ingesting the organism induced gastritis, satisfying causation criteria.",
+      "source": "Self-experiment case report",
+      "source_reliability": 0.6
+    },
+    {
+      "id": "gastritis_ev_antibiotic",
+      "topic": "chronic_gastritis",
+      "claim_text": "Observation: antibiotic treatment cleared the infection and the gastritis together.",
+      "source": "Treatment follow-up series",
+      "source_reliability": 0.71
+    }
+  ],
+  "relationships": [
+    {
+      "from": "ulcer_stress",
+      "to": "ulcer_bacteria",
+      "type": "contradiction"
+    },
+    {
+      "from": "ulcer_acid_only",
+      "to": "ulcer_bacteria",
+      "type": "contradiction"
+    },
+    {
+      "from": "fat_all_bad",
+      "to": "fat_saturated_recent",
+      "type": "contradiction"
+    },
+    {
+      "from": "fat_supports_recent",
+      "to": "fat_saturated_recent",
+      "type": "support"
+    },
+    {
+      "from": "bedrest_helpful",
+      "to": "bedrest_harmful",
+      "type": "contradiction"
+    },
+    {
+      "from": "bedrest_blog",
+      "to": "bedrest_harmful",
+      "type": "contradiction"
+    },
+    {
+      "from": "bedrest_supports_active",
+      "to": "bedrest_harmful",
+      "type": "support"
+    },
+    {
+      "from": "vitc_prevents",
+      "to": "vitc_no_cure",
+      "type": "contradiction"
+    },
+    {
+      "from": "vitc_megadose_blog",
+      "to": "vitc_no_cure",
+      "type": "contradiction"
+    },
+    {
+      "from": "vitc_supports_recent",
+      "to": "vitc_no_cure",
+      "type": "support"
+    },
+    {
+      "from": "hydration_8cups_rule",
+      "to": "hydration_8cups_myth",
+      "type": "contradiction"
+    },
+    {
+      "from": "hydration_supports_varies",
+      "to": "hydration_8cups_myth",
+      "type": "support"
+    },
+    {
+      "from": "childbed_handwash",
+      "to": "childbed_miasma",
+      "type": "contradiction"
+    },
+    {
+      "from": "childbed_ev_wards",
+      "to": "childbed_handwash",
+      "type": "support"
+    },
+    {
+      "from": "childbed_ev_autopsy",
+      "to": "childbed_handwash",
+      "type": "support"
+    },
+    {
+      "from": "childbed_ev_cadaver",
+      "to": "childbed_handwash",
+      "type": "support"
+    },
+    {
+      "from": "childbed_ev_seasonal",
+      "to": "childbed_handwash",
+      "type": "support"
+    },
+    {
+      "from": "gastritis_infection",
+      "to": "gastritis_acid",
+      "type": "contradiction"
+    },
+    {
+      "from": "gastritis_ev_biopsy",
+      "to": "gastritis_infection",
+      "type": "support"
+    },
+    {
+      "from": "gastritis_ev_culture",
+      "to": "gastritis_infection",
+      "type": "support"
+    },
+    {
+      "from": "gastritis_ev_selfexp",
+      "to": "gastritis_infection",
+      "type": "support"
+    },
+    {
+      "from": "gastritis_ev_antibiotic",
+      "to": "gastritis_infection",
+      "type": "support"
+    },
+    {
+      "from": "drift_ev_seafloor",
+      "to": "drift_mobilist",
+      "type": "support"
+    },
+    {
+      "from": "drift_ev_glacial",
+      "to": "drift_mobilist",
+      "type": "support"
+    },
+    {
+      "from": "drift_ev_rockstrata",
+      "to": "drift_mobilist",
+      "type": "support"
+    },
+    {
+      "from": "drift_ev_fossils",
+      "to": "drift_mobilist",
+      "type": "support"
+    },
+    {
+      "from": "drift_ev_coastlines",
+      "to": "drift_mobilist",
+      "type": "support"
+    },
+    {
+      "from": "drift_mobilist",
+      "to": "drift_fixist",
+      "type": "contradiction"
+    }
+  ]
+}
