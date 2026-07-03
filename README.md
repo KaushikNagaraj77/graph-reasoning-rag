@@ -117,23 +117,58 @@ existing methods.
 - No comparison yet against established learned methods from the truth-discovery
   literature — the natural next benchmark.
 
-## Possible next steps
+## Testing on real documents — and where it broke
 
-- Ingest **real documents** via LLM claim-extraction and test whether the effect
-  survives extraction noise.
-- Benchmark against established truth-discovery methods rather than only a naive
-  baseline.
-- Strengthen the evidence-accumulation mechanism so corroboration can decisively,
-  not marginally, overcome authority.
+The hand-authored result validated the mechanism on a clean, controlled graph.
+The harder question was whether it survives real documents, so I built an
+extraction pipeline (LLM proposes claims + relationships from real text → human
+verifies → engine runs) and tested it on a deliberately hard case: a
+dismissed-at-the-time (low-reliability) continental-drift claim against the
+authoritative fixist consensus.
+
+It failed at first — and diagnosing *why*, one variable at a time, was the most
+useful part of the project. The reasoning engine was never the bottleneck; two
+**LLM-extraction** flaws were:
+
+- **Claim fragmentation** — the LLM split one position into many near-duplicate
+  claims and scattered the supporting evidence across them, so the evidence never
+  concentrated on the claim under comparison.
+- **Missing refutation edges** — the LLM drew *support* edges but not the
+  *contradiction* edges where evidence refutes a rival, so the
+  authoritative-but-wrong claim self-reinforced unopposed. (Evidence is bipolar:
+  corroborating a claim also disconfirms its rivals.)
+
+Correcting both at the extraction step — consolidating duplicate claims,
+attaching evidence to the core claim, and proposing *genuine* refutation edges —
+let the correct claim overcome even a large authority gap, without regressing any
+previously-passing case. Full write-up: [`docs/WRITEUP.md`](docs/WRITEUP.md).
+
+The takeaway: **the quality of graph reasoning is hostage to the quality of graph
+construction.** Where the graph is extracted from unstructured text, extraction
+quality — not the propagation rule — is what determines whether reasoning works.
+Graph reasoning is strongest when the structure is a trustworthy given (curated
+databases, ontologies, recorded relationships) rather than extracted unreliably
+from prose.
+
+## Honest scope
+
+- All results are on small (8–14 topic) hand-built corpora. This validates the
+  mechanism and the diagnosis, not generalization or statistical significance.
+- The core idea is **not novel** — it maps onto established truth-discovery work.
+- Confidence-propagation engines of this kind are vulnerable to collusion (many
+  low-reliability sources corroborating one false claim); guarding against that
+  without collapsing to a flat reliability rule is unresolved.
+- Not yet benchmarked against established truth-discovery datasets — the natural
+  next validation.
 
 ## Structure
 
 ```
-graph_reasoning/       the domain-agnostic reasoning engine (graph.py)
-data/                  the hand-authored conflicting-claim corpus
-experiments/           the contradiction experiment + baseline comparison
+graph_reasoning/       the domain-agnostic reasoning engine (graph.py) + extraction
+data/                  the hand-authored corpus + real-document sets
+experiments/           the contradiction experiment, baseline, and mechanism comparison
 tests/                 standalone + contradiction-handling tests
-docs/                  prior-project findings (the trading origin)
+docs/                  WRITEUP.md (the extraction-flaws write-up) + prior-project findings
 ```
 
 ## Running it
