@@ -371,6 +371,123 @@ def _extract_claims_per_document(documents, client=None, model=DEFAULT_MODEL,
 
 
 # ---------------------------------------------------------------------------
+# 2b. Stance-tagged extraction for the signal layer (graph_reasoning.signals)
+# ---------------------------------------------------------------------------
+#
+# Same pipeline as extract_claims, plus a `stance` per claim: "bullish" /
+# "bearish" for a THESIS (a position on the asset's prospects), "neutral" for
+# EVIDENCE (a fact the document reports). The document's `topic` field is the
+# asset. Reliability still comes from metadata, never the LLM. Output drops
+# straight into graph_reasoning.signals.reason_signal once the proposed
+# relationships have been human-verified.
+#
+# NOTE: this entry point reuses _structured_call unchanged but has not yet been
+# exercised against the live API in this repository; treat the prompt as a
+# first draft to be checked on real documents.
+
+class StanceClaim(BaseModel):
+    """One atomic claim plus its stance toward the asset."""
+    claim_text: str = Field(
+        description="A short, atomic statement of one claim the document asserts."
+    )
+    stance: str = Field(
+        description=(
+            'One of "bullish", "bearish", or "neutral". Use "bullish"/"bearish" '
+            "ONLY for a thesis: a forward-looking position on the asset's "
+            "prospects (growth, margins, valuation, risk). Use \"neutral\" for "
+            "a reported fact, figure, or event, even if it clearly favors one side."
+        )
+    )
+
+
+class DocumentStanceClaims(BaseModel):
+    doc_id: str = Field(description="The document id these claims came from.")
+    claims: List[StanceClaim] = Field(
+        description="The atomic, stance-tagged claims asserted by this document."
+    )
+
+
+class BatchStanceExtractionResult(BaseModel):
+    documents: List[DocumentStanceClaims] = Field(
+        description="Per-document claim lists, one entry per input document."
+    )
+
+
+_STANCE_EXTRACTION_SYSTEM = _BATCH_EXTRACTION_SYSTEM + (
+    "\n\nSTANCE. The topic of each document is a tradable asset. Tag every claim "
+    'with a stance. A THESIS claim states a position on the asset\'s prospects '
+    '(e.g. "revenue will grow above 20%", "the multiple will compress") and is '
+    '"bullish" or "bearish". An EVIDENCE claim reports a fact, figure, or event '
+    '(e.g. "Q2 segment revenue grew 34% year over year", "the largest customer '
+    'plans in-house chips") and is "neutral" EVEN WHEN it obviously favors one '
+    "side — the reasoning layer decides what evidence supports, not the "
+    "extractor. Do not infer a thesis the document does not actually state."
+)
+
+_VALID_STANCES = ("bullish", "bearish", "neutral")
+
+
+def extract_stance_claims(documents, client=None, model=DEFAULT_MODEL,
+                          verbose=False):
+    """
+    Batched extraction of stance-tagged claims for the signal layer. Each
+    document's `topic` is treated as the asset. Returns claim dicts in the
+    signals corpus schema: {id, claim_text, stance, source, source_reliability,
+    doc_id, asset}. A claim with an unrecognized stance is coerced to
+    "neutral" (the safe default: it can support or refute but cannot be a
+    thesis) and reported when verbose.
+    """
+    client = client or _get_client()
+    documents = list(documents)
+    by_id = {doc.doc_id: doc for doc in documents}
+
+    catalog = "\n\n".join(
+        f"doc_id: {doc.doc_id}\ntopic (asset): {doc.topic}\ntext:\n{doc.text.strip()}"
+        for doc in documents
+    )
+    message = (
+        "Extract atomic, stance-tagged claims for each of the following "
+        "documents. Return one entry per document, tagged with its exact "
+        "doc_id.\n\n" + catalog
+    )
+    result = _structured_call(
+        client, model, _STANCE_EXTRACTION_SYSTEM, message,
+        BatchStanceExtractionResult, "record_stance_claims",
+        max_output_tokens=8000,
+    )
+
+    all_claims = []
+    for entry in result.documents:
+        doc = by_id.get(entry.doc_id)
+        if doc is None:
+            continue
+        for i, c in enumerate(entry.claims):
+            stance = c.stance.strip().lower()
+            if stance not in _VALID_STANCES:
+                if verbose:
+                    print(f"  {doc.doc_id}_c{i}: unrecognized stance {c.stance!r}, "
+                          "coerced to neutral")
+                stance = "neutral"
+            all_claims.append({
+                "id": f"{doc.doc_id}_c{i}",
+                "claim_text": c.claim_text,
+                "stance": stance,
+                "source": doc.source,
+                "source_reliability": doc.source_reliability,
+                "doc_id": doc.doc_id,
+                "asset": doc.topic,
+            })
+        if verbose:
+            print(f"  {doc.doc_id}: extracted {len(entry.claims)} claim(s)")
+
+    missing = [d.doc_id for d in documents if d.doc_id not in
+               {e.doc_id for e in result.documents}]
+    if missing and verbose:
+        print(f"  documents missing from batch response: {missing}")
+    return all_claims
+
+
+# ---------------------------------------------------------------------------
 # 3. LLM relationship proposal (written to a review file, NOT fed to engine)
 # ---------------------------------------------------------------------------
 
