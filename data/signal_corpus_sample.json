@@ -1,0 +1,81 @@
+{
+  "description": "Hand-authored SAMPLE signal corpus for a FICTIONAL asset (ACME). Illustrates the input schema for graph_reasoning.signals: thesis claims carry a bullish/bearish stance, evidence claims are neutral, relationships are verified support/contradiction edges. Reliability reflects source type (primary filing ~0.9, call transcript ~0.88, sell-side note ~0.55-0.7, boutique channel check ~0.6, forum post ~0.15). Not investment advice; the asset does not exist.",
+  "asset": "ACME",
+  "as_of": "2026-09-09",
+  "claims": [
+    {
+      "id": "bull_thesis",
+      "stance": "bullish",
+      "claim_text": "ACME's data-center segment will drive revenue growth above 20% over the next two quarters.",
+      "source": "Sell-side initiation note",
+      "source_reliability": 0.55
+    },
+    {
+      "id": "bear_thesis",
+      "stance": "bearish",
+      "claim_text": "ACME's data-center growth has peaked and revenue will decelerate from here.",
+      "source": "Widely-followed macro newsletter",
+      "source_reliability": 0.70
+    },
+    {
+      "id": "ev_10q_growth",
+      "stance": "neutral",
+      "claim_text": "The Q2 10-Q reports data-center revenue up 34% year over year, accelerating from 28% in Q1.",
+      "source": "Q2 10-Q filing",
+      "source_reliability": 0.92
+    },
+    {
+      "id": "ev_guidance_raise",
+      "stance": "neutral",
+      "claim_text": "Management raised full-year revenue guidance on the Q2 earnings call.",
+      "source": "Q2 earnings call transcript",
+      "source_reliability": 0.88
+    },
+    {
+      "id": "ev_backlog",
+      "stance": "neutral",
+      "claim_text": "Contracted backlog roughly doubled quarter over quarter per the Q2 10-Q.",
+      "source": "Q2 10-Q filing",
+      "source_reliability": 0.92
+    },
+    {
+      "id": "ev_customer_inhouse",
+      "stance": "neutral",
+      "claim_text": "ACME's largest customer disclosed a multi-year plan to design its own accelerators.",
+      "source": "Customer 10-K filing",
+      "source_reliability": 0.90
+    },
+    {
+      "id": "ev_channel_pushouts",
+      "stance": "neutral",
+      "claim_text": "Channel checks report order push-outs at two hyperscale customers.",
+      "source": "Boutique channel-check research",
+      "source_reliability": 0.60
+    },
+    {
+      "id": "forum_moon",
+      "stance": "bullish",
+      "claim_text": "ACME is going to the moon, load up.",
+      "source": "Retail forum post",
+      "source_reliability": 0.15
+    }
+  ],
+  "relationships": [
+    {"from": "bull_thesis", "to": "bear_thesis", "type": "contradiction",
+     "rationale": "Growth above 20% and growth having peaked cannot both hold."},
+    {"from": "ev_10q_growth", "to": "bull_thesis", "type": "support",
+     "rationale": "Accelerating 34% segment growth supports continued >20% growth."},
+    {"from": "ev_10q_growth", "to": "bear_thesis", "type": "contradiction",
+     "rationale": "Acceleration from 28% to 34% directly refutes 'growth has peaked'."},
+    {"from": "ev_guidance_raise", "to": "bull_thesis", "type": "support",
+     "rationale": "A guidance raise is management's own forecast of continued growth."},
+    {"from": "ev_backlog", "to": "bull_thesis", "type": "support",
+     "rationale": "A doubled backlog is contracted future revenue."},
+    {"from": "ev_customer_inhouse", "to": "bear_thesis", "type": "support",
+     "rationale": "Loss of the largest customer over time supports deceleration."},
+    {"from": "ev_channel_pushouts", "to": "bear_thesis", "type": "support",
+     "rationale": "Order push-outs are consistent with near-term deceleration."},
+    {"from": "forum_moon", "to": "bull_thesis", "type": "support",
+     "rationale": "Same direction, but a junk source; should add almost nothing."}
+  ]
+}

@@ -161,11 +161,51 @@ from prose.
 - Not yet benchmarked against established truth-discovery datasets — the natural
   next validation.
 
+## Signal reasoning (toward research agents)
+
+`graph_reasoning/signals.py` points the same engine back at its original
+domain, but as a **reasoning and suggestion layer, not an execution layer**.
+Given sourced, stance-tagged claims about one asset — `bullish`/`bearish`
+*thesis* claims and `neutral` *evidence* claims — plus verified
+support/contradiction edges, `reason_signal` returns an explained
+`Suggestion`: `suggest_buy`, `suggest_avoid`, or `no_call`, with both theses,
+their scores, the sources behind each, and every contradiction found.
+
+Two abstention guards are built in, because the prior project's lesson was
+that unguarded signals do not survive contact with costs:
+
+- **thin margin → `no_call`**: the evidence does not separate the theses;
+- **single credible source → `no_call`**: a leading thesis backed by one
+  source (junk sources don't count) is not corroborated. This is the simplest
+  form of the collusion guard listed under *Honest scope*.
+
+Thesis-vs-thesis contradictions are mirrored so both sides are penalized;
+evidence-vs-thesis refutations stay directed. `log_suggestion` appends each
+call with its `as_of` date to a JSONL decision log so hit-rate can be scored
+forward against realized returns net of costs — a suggestion that is never
+scored is just an opinion.
+
+```
+python experiments/run_signal_demo.py            # fictional sample asset
+python tests/test_signals.py
+```
+
+On the sample corpus the flat baseline follows the more reliable (bearish)
+newsletter; the engine suggests buy because the weaker sell-side thesis is
+backed by three primary sources, one of which directly refutes the bear
+thesis. `extract_stance_claims` in `extract.py` produces this input from real
+documents (reliability still from metadata; relationships still human-gated),
+but it has not yet been run against the live API here. What is **not** built:
+any measurement that these suggestions predict returns. That forward test is
+the next step, and until it exists this layer is a reasoning tool, not a
+signal.
+
 ## Structure
 
 ```
 graph_reasoning/       the domain-agnostic reasoning engine (graph.py) + extraction
-data/                  the hand-authored corpus + real-document sets
+                       + signals.py (asset thesis reasoning -> explained suggestion)
+data/                  the hand-authored corpus + real-document sets + signal sample
 experiments/           the contradiction experiment, baseline, and mechanism comparison
 tests/                 standalone + contradiction-handling tests
 docs/                  WRITEUP.md (the extraction-flaws write-up) + prior-project findings
